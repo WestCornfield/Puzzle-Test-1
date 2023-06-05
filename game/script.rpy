@@ -4,7 +4,7 @@
 # name of the character.
 
 define e = Character("Eileen", color="#c8ffc8")
-define has_key = False
+define inventory = []
 
 # The game starts here.
 
@@ -61,13 +61,13 @@ label loop:
     menu:
         e "What would you like to do?"
 
-        "Take the key" if not has_key:
-            $ has_key = True
+        "Take the key" if not 'key' in inventory:
+            $ inventory.append('key')
             e "You take the key off the table! Maybe it will fit the door?"
             call loop
         "Try and turn the handle":
             e "You try to jiggle the knob. But, unfortunately, the door is locked..."
             call loop
-        "Unlock the door" if has_key:
+        "Unlock the door" if 'key' in inventory:
             e "You slide the key into the door! It opens! You leave the room!"
             return
