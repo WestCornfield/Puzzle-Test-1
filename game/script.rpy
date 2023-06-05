@@ -3,7 +3,12 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Eileen", color="#c8ffc8")
+image puzzleRoomWithKey = "bg/Background_With_Key.png"
+image puzzleRoomWithoutKey = "bg/Background_Without_Key.png"
+
+image wilbur = "characters/wilbur/Professor_Wilbur.png"
+
+define w = Character("Wilbur", color="#c8ffc8")
 define inventory = []
 
 # The game starts here.
@@ -20,54 +25,57 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show eileen happy
+    show wilbur
 
     # These display lines of dialogue.
 
-    e "Hey, Wes!"
+    w "Hey, Wes!"
 
-    e "This is a great idea!"
+    w "This is a great idea!"
 
-    e "We're going to start by building a simple brick in the form of a puzzle."
+    w "We're going to start by building a simple brick in the form of a puzzle."
 
-    e "Once we have that, it's just a matter of stacking bricks on top of each other."
+    w "Once we have that, it's just a matter of stacking bricks on top of each other."
 
-    e "We'll get there in no time."
+    w "We'll get there in no time."
 
-    e "So, let's begin the puzzle..."
+    w "So, let's begin the puzzle..."
 
-    call puzzle
+    jump puzzle
 
     # This ends the game.
 
     return
 
 label puzzle:
-    e "On the table in front of you is a key."
+    scene puzzleRoomWithKey
 
-    e "On the other side of the room is a door."
+    w "On the table in front of you is a key."
 
-    e "For whatever reason, you feel compelled to leave this room."
+    w "On the other side of the room is a door."
+
+    w "For whatever reason, you feel compelled to leave this room."
 
     call loop
 
-    e "Congratulations! You solved the puzzle!"
+    w "Congratulations! You solved the puzzle!"
 
-    e "Now, let's make it better!"
+    w "Now, let's make it better!"
 
     return
 
 label loop:
     menu:
-        e "What would you like to do?"
+        w "What would you like to do?"
 
         "Take the key" if not 'key' in inventory:
+            scene puzzleRoomWithoutKey
             $ inventory.append('key')
-            e "You take the key off the table! Maybe it will fit the door?"
+            w "You take the key off the table! Maybe it will fit the door?"
             call loop
         "Try and turn the handle":
-            e "You try to jiggle the knob. But, unfortunately, the door is locked..."
+            w "You try to jiggle the knob. But, unfortunately, the door is locked..."
             call loop
         "Unlock the door" if 'key' in inventory:
-            e "You slide the key into the door! It opens! You leave the room!"
+            w "You slide the key into the door! It opens! You leave the room!"
             return
