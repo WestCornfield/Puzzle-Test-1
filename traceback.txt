@@ -1,0 +1,26 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 39, in script call
+    call park
+  File "game/script.rpy", line 39, in script call
+    call park
+ScriptError: could not find label 'park'.
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 39, in script call
+    call park
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 1490, in execute
+    rv = renpy.game.context().call(label, return_site=self.next.name)
+  File "game/script.rpy", line 39, in script call
+    call park
+  File "/Applications/renpy-7.4.11-sdk/renpy/script.py", line 918, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'park'.
+
+Darwin-21.6.0-x86_64-i386-64bit
+Ren'Py 7.4.11.2266
+Puzzle Test 1 1.0
+Sun Jun  4 20:51:45 2023
