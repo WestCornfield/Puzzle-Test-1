@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 64: expected menuitem
-    if not has_key:
-    ^
+File "game/script.rpy", line 10: invalid syntax
+    "objects/Key.png" pos (400, 400)
+                         ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sun Jun  4 22:33:31 2023
+Mon Jun  5 23:48:11 2023

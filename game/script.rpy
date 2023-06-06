@@ -5,11 +5,18 @@
 
 image puzzleRoomWithKey = "bg/Background_With_Key.png"
 image puzzleRoomWithoutKey = "bg/Background_Without_Key.png"
+image puzzleRoom = "bg/Puzzle_Room.png"
+
+image key = "objects/Key.png"
 
 image wilbur = "characters/wilbur/Professor_Wilbur.png"
 
 define w = Character("Wilbur", color="#c8ffc8")
 define inventory = []
+
+transform on_table:
+    xpos 790
+    ypos 385
 
 # The game starts here.
 
@@ -48,7 +55,9 @@ label start:
     return
 
 label puzzle:
-    scene puzzleRoomWithKey
+    scene puzzleRoom
+
+    show key at on_table
 
     w "On the table in front of you is a key."
 
@@ -69,7 +78,7 @@ label loop:
         w "What would you like to do?"
 
         "Take the key" if not 'key' in inventory:
-            scene puzzleRoomWithoutKey
+            hide key
             $ inventory.append('key')
             w "You take the key off the table! Maybe it will fit the door?"
             call loop
