@@ -11,6 +11,15 @@ image key = "objects/Key.png"
 
 image wilbur = "characters/wilbur/Professor_Wilbur.png"
 
+image wilbur_idle:
+    "characters/wilbur/idle/frame_1.png"
+    pause 2.0
+    "characters/wilbur/idle/frame_2.png"
+    pause 0.1
+    "characters/wilbur/idle/frame_3.png"
+    pause 0.1
+    repeat
+
 define w = Character("Wilbur", color="#c8ffc8")
 define inventory = []
 
@@ -32,7 +41,7 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show wilbur
+    show wilbur_idle
 
     # These display lines of dialogue.
 
