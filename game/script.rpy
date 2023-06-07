@@ -7,9 +7,32 @@ image puzzleRoomWithKey = "bg/Background_With_Key.png"
 image puzzleRoomWithoutKey = "bg/Background_Without_Key.png"
 image puzzleRoom = "bg/Puzzle_Room.png"
 
-image key = "objects/Key.png"
+image key = "objects/key/Key.png"
 
 image wilbur = "characters/wilbur/Professor_Wilbur.png"
+
+image key_idle:
+    "objects/key/idle/frame_1.png"
+    pause 2.0
+    "objects/key/idle/frame_2.png"
+    pause 0.1
+    "objects/key/idle/frame_3.png"
+    pause 0.1
+    "objects/key/idle/frame_4.png"
+    pause 0.1
+    "objects/key/idle/frame_5.png"
+    pause 0.1
+    "objects/key/idle/frame_6.png"
+    pause 0.1
+    "objects/key/idle/frame_7.png"
+    pause 0.1
+    "objects/key/idle/frame_8.png"
+    pause 0.1
+    "objects/key/idle/frame_9.png"
+    pause 0.1
+    "objects/key/idle/frame_10.png"
+    pause 0.1
+    repeat
 
 image wilbur_idle:
     "characters/wilbur/idle/frame_1.png"
@@ -17,6 +40,17 @@ image wilbur_idle:
     "characters/wilbur/idle/frame_2.png"
     pause 0.1
     "characters/wilbur/idle/frame_3.png"
+    pause 0.1
+    repeat
+
+image wilbur_whimsical:
+    "characters/wilbur/whimsical/frame_1.png"
+    pause 1.5
+    "characters/wilbur/whimsical/frame_2.png"
+    pause 0.1
+    "characters/wilbur/whimsical/frame_3.png"
+    pause 0.2
+    "characters/wilbur/whimsical/frame_2.png"
     pause 0.1
     repeat
 
@@ -53,7 +87,15 @@ label start:
 
     w "Once we have that, it's just a matter of stacking bricks on top of each other."
 
+    hide wilbur_idle
+
+    show wilbur_whimsical
+
     w "We'll get there in no time."
+
+    hide wilbur_whimsical
+
+    show wilbur_idle
 
     w "So, let's begin the puzzle..."
 
@@ -66,7 +108,7 @@ label start:
 label puzzle:
     scene puzzleRoom
 
-    show key at on_table
+    show key_idle at on_table
 
     w "On the table in front of you is a key."
 
@@ -87,7 +129,7 @@ label loop:
         w "What would you like to do?"
 
         "Take the key" if not 'key' in inventory:
-            hide key
+            hide key_idle
             $ inventory.append('key')
             w "You take the key off the table! Maybe it will fit the door?"
             call loop
