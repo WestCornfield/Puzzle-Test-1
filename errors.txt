@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 10: invalid syntax
-    "objects/Key.png" pos (400, 400)
-                         ^
+File "game/script.rpy", line 78: expected statement.
+    config.overlay_functions.append(display_items_overlay)
+                                                          ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon Jun  5 23:48:11 2023
+Thu Jun  8 14:37:12 2023
