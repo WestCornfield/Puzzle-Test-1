@@ -2,11 +2,21 @@
 errors listed below, and try again.
 
 
-The label start is defined twice, at File "game/examples/script.rpy", line 83:
-label start:
-and File "game/script.rpy", line 11:
-label start:
+File "game/rooms.rpy", line 4: expected 'comma or end of line' not found.
+    zorder 2
+    ^
 
+File "game/rooms.rpy", line 9: expected 'comma or end of line' not found.
+    zorder 2
+    ^
+
+File "game/rooms.rpy", line 14: expected 'comma or end of line' not found.
+    zorder 2
+    ^
+
+File "game/rooms.rpy", line 19: expected 'comma or end of line' not found.
+    zorder 2
+    ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Thu Jun  8 19:37:58 2023
+Fri Jun  9 08:48:39 2023
