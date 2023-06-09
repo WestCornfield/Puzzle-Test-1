@@ -1,157 +1,68 @@
-﻿# The script of the game goes in this file.
+# The script of the game goes in this file.
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-image puzzleRoomWithKey = "bg/Background_With_Key.png"
-image puzzleRoomWithoutKey = "bg/Background_Without_Key.png"
-image puzzleRoom = "bg/Puzzle_Room.png"
+define e = Character("Eileen")
 
-image key = "objects/key/Key.png"
-
-image wilbur = "characters/wilbur/Professor_Wilbur.png"
-
-image key_idle:
-    "objects/key/idle/frame_1.png"
-    pause 2.0
-    "objects/key/idle/frame_2.png"
-    pause 0.1
-    "objects/key/idle/frame_3.png"
-    pause 0.1
-    "objects/key/idle/frame_4.png"
-    pause 0.1
-    "objects/key/idle/frame_5.png"
-    pause 0.1
-    "objects/key/idle/frame_6.png"
-    pause 0.1
-    "objects/key/idle/frame_7.png"
-    pause 0.1
-    "objects/key/idle/frame_8.png"
-    pause 0.1
-    "objects/key/idle/frame_9.png"
-    pause 0.1
-    "objects/key/idle/frame_10.png"
-    pause 0.1
-    repeat
-
-image wilbur_idle:
-    "characters/wilbur/idle/frame_1.png"
-    pause 2.0
-    "characters/wilbur/idle/frame_2.png"
-    pause 0.1
-    "characters/wilbur/idle/frame_3.png"
-    pause 0.1
-    repeat
-
-image wilbur_whimsical:
-    "characters/wilbur/whimsical/frame_1.png"
-    pause 1.5
-    "characters/wilbur/whimsical/frame_2.png"
-    pause 0.1
-    "characters/wilbur/whimsical/frame_3.png"
-    pause 0.2
-    "characters/wilbur/whimsical/frame_2.png"
-    pause 0.1
-    repeat
-
-define w = Character("Wilbur", color="#c8ffc8")
-define inventory = []
-
-transform on_table:
-    xpos 790
-    ypos 385
-
-init:
-    python:
-        showitems = True
-
-        def display_items_overlay():
-            if showitems:
-                inventory_show = "Inventory: "
-                for i in range(0, len(inventory)):
-                    item_name = inventory[i].title()
-                    if i > 0:
-                        inventory_show += ", "
-                    inventory_show += item_name
-                ui.frame()
-                ui.text(inventory_show)
-        config.overlay_functions.append(display_items_overlay)
+default in_room = False
+default move_count = 0
+default current_room = "LivingRoom"
+default previous_room = ""
 
 # The game starts here.
 
 label start:
+    e "Here is the start of your game."
 
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
+    #Call the first scene
+    $ current_room = "LivingRoom"
+    call MyRoom
 
-    scene bg room
-
-    # This shows a character sprite. A placeholder is used, but you can
-    # replace it by adding a file named "eileen happy.png" to the images
-    # directory.
-
-    show wilbur_idle
-
-    # These display lines of dialogue.
-
-    w "Hey, Wes!"
-
-    w "This is a great idea!"
-
-    w "We're going to start by building a simple brick in the form of a puzzle."
-
-    w "Once we have that, it's just a matter of stacking bricks on top of each other."
-
-    hide wilbur_idle
-
-    show wilbur_whimsical
-
-    w "We'll get there in no time."
-
-    hide wilbur_whimsical
-
-    show wilbur_idle
-
-    w "So, let's begin the puzzle..."
-
-    jump puzzle
-
-    # This ends the game.
+    e "You finished the game!"
 
     return
 
-label puzzle:
-    scene puzzleRoom
+label MyRoom:
+    #Update values behind the scenes
+    $ update_gamestate()
 
-    show key_idle at on_table
+    #Enter the scene
+    $ in_room = False
+    $ renpy.show_screen(current_room + "Screen")
 
-    w "On the table in front of you is a key."
+    #React to entrance
+    if current_room != previous_room:
+        $ check_intro_reactions(current_room)
+    $ previous_room = current_room
 
-    w "On the other side of the room is a door."
-
-    w "For whatever reason, you feel compelled to leave this room."
-
-    call loop
-
-    w "Congratulations! You solved the puzzle!"
-
-    w "Now, let's make it better!"
+    #Enable scene interactivity
+    $ in_room = True
+    $ renpy.call_screen(current_room + "Screen")
 
     return
 
-label loop:
-    menu:
-        w "What would you like to do?"
+label EndGame:
+    e "Let's finish the game!"
 
-        "Take the key" if not 'key' in inventory:
-            hide key_idle
-            $ inventory.append('key')
-            w "You take the key off the table! Maybe it will fit the door?"
-            call loop
-        "Try and turn the handle":
-            w "You try to jiggle the knob. But, unfortunately, the door is locked..."
-            call loop
-        "Unlock the door" if 'key' in inventory:
-            w "You slide the key into the door! It opens! You leave the room!"
-            return
+    return
+
+label LookAtDinner:
+
+    $ in_room = False
+
+    $ renpy.show_screen(current_room + "Screen")
+
+    e "Oooh! Looks like we're having pizza!"
+
+    jump MyRoom
+
+label EnterLivingRoom:
+    e "I just entered the living room!"
+
+    return
+
+label EnterDiningRoom:
+    e "I just entered the dining room!"
+
+    return

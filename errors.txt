@@ -2,9 +2,11 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 78: expected statement.
-    config.overlay_functions.append(display_items_overlay)
-                                                          ^
+The label start is defined twice, at File "game/examples/script.rpy", line 83:
+label start:
+and File "game/script.rpy", line 11:
+label start:
+
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Thu Jun  8 14:37:12 2023
+Thu Jun  8 19:37:58 2023
