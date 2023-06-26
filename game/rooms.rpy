@@ -14,9 +14,9 @@ transform option_two_text_button:
     xpos 50
     ypos 400
 
-screen LivingRoomScreen():
-    add "rooms/Living_Room.png"
-    text "Living Room":
+screen PuzzleRoomScreen():
+    add "rooms/Puzzle_Room.png"
+    text "Puzzle Room":
         at room_text
     text "Move Count: " + str(move_count):
         at move_count_text
@@ -32,9 +32,9 @@ screen DiningRoomScreen():
         at room_text
     text "Move Count: " + str(move_count):
         at move_count_text
-    textbutton "Go to Living Room":
+    textbutton "Go to Puzzle Room":
         at option_one_text_button
-        action [SensitiveIf(in_room), SetVariable("current_room", "LivingRoom"), Jump("MyRoom")]
+        action [SensitiveIf(in_room), SetVariable("current_room", "PuzzleRoom"), Jump("MyRoom")]
     textbutton "Look at Dinner":
         at option_two_text_button
         action [SensitiveIf(in_room), Jump("LookAtDinner")]

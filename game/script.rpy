@@ -7,7 +7,7 @@ define e = Character("Eileen")
 
 default in_room = False
 default move_count = 0
-default current_room = "LivingRoom"
+default current_room = "PuzzleRoom"
 default previous_room = ""
 
 # The game starts here.
@@ -16,7 +16,7 @@ label start:
     e "Here is the start of your game."
 
     #Call the first scene
-    $ current_room = "LivingRoom"
+    $ current_room = "PuzzleRoom"
     call MyRoom
 
     e "You finished the game!"
@@ -57,8 +57,8 @@ label LookAtDinner:
 
     jump MyRoom
 
-label EnterLivingRoom:
-    e "I just entered the living room!"
+label EnterPuzzleRoom:
+    e "I just entered the puzzle room!"
 
     return
 
