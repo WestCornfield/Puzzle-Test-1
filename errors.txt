@@ -2,21 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/rooms.rpy", line 4: expected 'comma or end of line' not found.
-    zorder 2
-    ^
-
-File "game/rooms.rpy", line 9: expected 'comma or end of line' not found.
-    zorder 2
-    ^
-
-File "game/rooms.rpy", line 14: expected 'comma or end of line' not found.
-    zorder 2
-    ^
-
-File "game/rooms.rpy", line 19: expected 'comma or end of line' not found.
-    zorder 2
-    ^
+File "game/rooms.rpy", line 23: expected a keyword argument, colon, or end of line.
+    imagebutton "objects/Hammer.png":
+                ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Fri Jun  9 08:48:39 2023
+Mon Jun 26 13:26:04 2023

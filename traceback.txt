@@ -1,34 +1,26 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 20, in script call
+  File "game/script.rpy", line 22, in script call
     call MyRoom
-  File "game/script.rpy", line 32, in script
-    $ renpy.show_screen(current_room + "Screen")
-  File "game/script.rpy", line 32, in <module>
-    $ renpy.show_screen(current_room + "Screen")
-Exception: Screen MyRoomScreen is not known.
-
+  File "game/script.rpy", line 48, in script
+    bg "rooms/Puzzle_Room.png"
+Exception: Sayer 'bg' is not defined.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 20, in script call
+  File "game/script.rpy", line 22, in script call
     call MyRoom
-  File "game/script.rpy", line 32, in script
-    $ renpy.show_screen(current_room + "Screen")
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 928, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "/Applications/renpy-7.4.11-sdk/renpy/python.py", line 2245, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/script.rpy", line 32, in <module>
-    $ renpy.show_screen(current_room + "Screen")
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 1131, in show_screen
-    raise Exception("Screen %s is not known.\n" % (name[0],))
-Exception: Screen MyRoomScreen is not known.
-
+  File "game/script.rpy", line 48, in script
+    bg "rooms/Puzzle_Room.png"
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 681, in execute
+    who = eval_who(self.who, self.who_fast)
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 574, in eval_who
+    raise Exception("Sayer '%s' is not defined." % who)
+Exception: Sayer 'bg' is not defined.
 
 Darwin-21.6.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 Puzzle Test 1 1.0
-Thu Jun  8 19:56:06 2023
+Mon Jun 26 13:51:59 2023

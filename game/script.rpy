@@ -3,12 +3,16 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
+image puzzleRoom = "rooms/Puzzle_Room.png"
+
 define e = Character("Eileen")
 
 default in_room = False
 default move_count = 0
 default current_room = "PuzzleRoom"
 default previous_room = ""
+
+define inventory = []
 
 # The game starts here.
 
@@ -41,6 +45,34 @@ label MyRoom:
     $ renpy.call_screen(current_room + "Screen")
 
     return
+
+label Hammer:
+    $ renpy.show_screen(current_room + "Screen")
+
+    e "On the table in the puzzle room, there's a hammer."
+
+    e "It's shimmering. Even the wooden handle, which is odd."
+
+    e "Pick it up?"
+
+    menu:
+        "Pick up the hammer":
+            jump TakeHammer
+        "Leave the hammer where it is":
+            jump LeaveHammer
+    jump MyRoom
+
+label TakeHammer:
+    $ inventory.append('hammer')
+
+    e "The hammer is now in your inventory!"
+
+    jump MyRoom
+
+label LeaveHammer:
+    e "You leave the hammer where it is."
+
+    jump MyRoom
 
 label EndGame:
     e "Let's finish the game!"

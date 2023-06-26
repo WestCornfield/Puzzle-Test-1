@@ -14,8 +14,17 @@ transform option_two_text_button:
     xpos 50
     ypos 400
 
+transform resting_on_table:
+    xpos 800
+    ypos 350
+
 screen PuzzleRoomScreen():
     add "rooms/Puzzle_Room.png"
+    if not 'hammer' in inventory:
+        imagebutton:
+            idle "objects/hammer/Hammer.png"
+            at resting_on_table
+            action [SensitiveIf(in_room), Jump("Hammer")]
     text "Puzzle Room":
         at room_text
     text "Move Count: " + str(move_count):
