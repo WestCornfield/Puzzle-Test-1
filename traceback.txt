@@ -1,26 +1,80 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 22, in script call
+  File "game/script.rpy", line 24, in script call
     call MyRoom
-  File "game/script.rpy", line 48, in script
-    bg "rooms/Puzzle_Room.png"
-Exception: Sayer 'bg' is not defined.
+  File "game/script.rpy", line 40, in script call
+    $ check_intro_reactions(current_room)
+  File "game/script.rpy", line 93, in script
+    e "I just entered the puzzle room!"
+  File "game/rooms.rpy", line 48, in execute
+    screen PuzzleRoomScreen():
+  File "game/rooms.rpy", line 48, in execute
+    screen PuzzleRoomScreen():
+  File "game/rooms.rpy", line 50, in execute
+    if not 'hammer' in inventory:
+  File "game/rooms.rpy", line 51, in execute
+    imagebutton:
+  File "game/rooms.rpy", line 51, in keywords
+    imagebutton:
+  File "game/rooms.rpy", line 52, in <module>
+    idle hammer_idle
+NameError: name 'hammer_idle' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 22, in script call
+  File "game/script.rpy", line 24, in script call
     call MyRoom
-  File "game/script.rpy", line 48, in script
-    bg "rooms/Puzzle_Room.png"
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 681, in execute
-    who = eval_who(self.who, self.who_fast)
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 574, in eval_who
-    raise Exception("Sayer '%s' is not defined." % who)
-Exception: Sayer 'bg' is not defined.
+  File "game/script.rpy", line 40, in script call
+    $ check_intro_reactions(current_room)
+  File "game/script.rpy", line 93, in script
+    e "I just entered the puzzle room!"
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "/Applications/renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
+    **display_args)
+  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "/Applications/renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 436, in visit_all
+    callback(self)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 447, in per_interact
+    self.update()
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 637, in update
+    self.screen.function(**self.scope)
+  File "game/rooms.rpy", line 48, in execute
+    screen PuzzleRoomScreen():
+  File "game/rooms.rpy", line 48, in execute
+    screen PuzzleRoomScreen():
+  File "game/rooms.rpy", line 50, in execute
+    if not 'hammer' in inventory:
+  File "game/rooms.rpy", line 51, in execute
+    imagebutton:
+  File "game/rooms.rpy", line 51, in keywords
+    imagebutton:
+  File "game/rooms.rpy", line 52, in <module>
+    idle hammer_idle
+NameError: name 'hammer_idle' is not defined
 
 Darwin-21.6.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 Puzzle Test 1 1.0
-Mon Jun 26 13:51:59 2023
+Mon Jun 26 14:29:05 2023

@@ -18,11 +18,38 @@ transform resting_on_table:
     xpos 800
     ypos 350
 
+image hammer_idle:
+    "objects/hammer/idle/frame_01.png"
+    pause 2.0
+    "objects/hammer/idle/frame_02.png"
+    pause 0.1
+    "objects/hammer/idle/frame_03.png"
+    pause 0.1
+    "objects/hammer/idle/frame_04.png"
+    pause 0.1
+    "objects/hammer/idle/frame_05.png"
+    pause 0.1
+    "objects/hammer/idle/frame_06.png"
+    pause 0.1
+    "objects/hammer/idle/frame_07.png"
+    pause 0.1
+    "objects/hammer/idle/frame_08.png"
+    pause 0.1
+    "objects/hammer/idle/frame_09.png"
+    pause 0.1
+    "objects/hammer/idle/frame_10.png"
+    pause 0.1
+    "objects/hammer/idle/frame_11.png"
+    pause 0.1
+    "objects/hammer/idle/frame_12.png"
+    pause 0.1
+    repeat
+
 screen PuzzleRoomScreen():
     add "rooms/Puzzle_Room.png"
     if not 'hammer' in inventory:
         imagebutton:
-            idle "objects/hammer/Hammer.png"
+            idle "hammer_idle"
             at resting_on_table
             action [SensitiveIf(in_room), Jump("Hammer")]
     text "Puzzle Room":
