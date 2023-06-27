@@ -62,6 +62,7 @@ label Hammer:
             jump TakeHammer
         "Leave the hammer where it is":
             jump LeaveHammer
+
     jump MyRoom
 
 label Mirror:
@@ -81,7 +82,98 @@ label Mirror:
     jump MyRoom
 
 label Nail:
-    e "getting tired. Come back to this later."
+    $ renpy.show_screen(current_room + "Screen")
+
+    e "You see a nail sticking out of the wall."
+
+    menu:
+        "Hang the mirror on the wall" if 'mirror' in inventory:
+            jump HangMirror
+        "Take the nail from the wall":
+            jump CantTakeNail
+        "Leave the nail where it is":
+            jump LeaveNail
+
+    $ inside_option = False
+
+    jump MyRoom
+
+label HangMirror:
+    $ mirror_placed = True
+
+    $ inventory.remove('mirror')
+
+    e "Hey, not bad! The mirror really opens up the room!"
+
+    e "Oh, also, it looks like that X in the center of the mirror is pointing to the opposite wall."
+
+    $ inside_option = False
+
+    jump MyRoom
+
+label HangingMirror:
+    $ renpy.show_screen(current_room + "Screen")
+
+    e "Hey! It looks like that X in the center of the mirror is pointing to the opposite wall."
+
+    jump MyRoom
+
+label SecretSpot:
+    $ renpy.show_screen(current_room + "Screen")
+
+    if not mirror_placed:
+        e "Your eye catches a spot in the wall. You're not sure why..."
+    else:
+        e "This is about where the mirror's X marks the spot."
+
+    menu:
+        "Hit the spot with the Hammer" if 'hammer' in inventory:
+                jump HitSpot
+        "Scratch at the spot":
+                jump ScratchSpot
+        "Leave the spot alone":
+                jump LeaveSpot
+
+label CantTakeNail:
+    e "You pry and pry with all your might..."
+
+    e "..."
+
+    e "Nope, that nail is really stuck in that wall."
+
+    $ inside_option = False
+
+    jump MyRoom
+
+label HitSpot:
+    e "You reel back... And hit the spot with your hammer!"
+
+    e "This is where the solution goes, one sec..."
+
+    $ inside_option = False
+
+    jump MyRoom
+
+label ScratchSpot:
+    e "You scratch at the spot."
+
+    e "..."
+
+    e "Nothing happens."
+
+    $ inside_option = False
+
+    jump MyRoom
+
+label LeaveSpot:
+    e "You leave the spot alone."
+
+    $ inside_option = False
+
+    jump MyRoom
+
+label LeaveNail:
+    e "You leave the nail where it is."
 
     $ inside_option = False
 

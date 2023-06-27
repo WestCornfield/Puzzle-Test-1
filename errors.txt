@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 82: expected ':' not found.
-    label Nail
-              ^
+File "game/script.rpy", line 129: expected ':' not found.
+    menu
+        ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon Jun 26 23:15:53 2023
+Tue Jun 27 17:58:02 2023
