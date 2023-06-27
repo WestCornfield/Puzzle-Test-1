@@ -100,24 +100,24 @@ screen PuzzleRoomScreen():
         imagebutton:
             auto "mirror_%s"
             at resting_on_wall
-            action [SensitiveIf(in_room), Jump("Mirror")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Mirror")]
     if not 'hammer' in inventory:
         imagebutton:
             auto "hammer_%s"
             at resting_on_table
-            action [SensitiveIf(in_room), Jump("Hammer")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Hammer")]
     if not mirror_placed:
         imagebutton:
             auto "nail_%s"
             at nail_in_wall
-            action [SensitiveIf(in_room), Jump("Nail")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Nail")]
     text "Puzzle Room":
         at room_text
     text "Move Count: " + str(move_count):
         at move_count_text
     textbutton "Go to Dining Room":
         at option_one_text_button
-        action [SensitiveIf(in_room), SetVariable("current_room", "DiningRoom"), Jump("MyRoom")]
+        action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), SetVariable("current_room", "DiningRoom"), Jump("MyRoom")]
     textbutton "End Game":
         at option_two_text_button
         action [SensitiveIf(in_room), Jump("EndGame")]

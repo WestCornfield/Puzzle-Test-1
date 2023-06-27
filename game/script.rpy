@@ -13,6 +13,7 @@ default current_room = "PuzzleRoom"
 default previous_room = ""
 
 define inventory = []
+define inside_option = False
 define mirror_placed = False
 
 # The game starts here.
@@ -82,6 +83,8 @@ label Mirror:
 label Nail:
     e "getting tired. Come back to this later."
 
+    $ inside_option = False
+
     jump MyRoom
 
 label TakeMirror:
@@ -89,10 +92,14 @@ label TakeMirror:
 
     e "The mirror is now in your inventory!"
 
+    $ inside_option = False
+
     jump MyRoom
 
 label LeaveMirror:
     e "You leave the mirror where it is."
+
+    $ inside_option = False
 
     jump MyRoom
 
@@ -101,10 +108,14 @@ label TakeHammer:
 
     e "The hammer is now in your inventory!"
 
+    $ inside_option = False
+
     jump MyRoom
 
 label LeaveHammer:
     e "You leave the hammer where it is."
+
+    $ inside_option = False
 
     jump MyRoom
 
