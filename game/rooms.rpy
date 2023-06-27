@@ -19,52 +19,56 @@ transform resting_on_table:
     ypos 350
 
 transform resting_on_wall:
-    xpos 112
-    ypos 192
+    xpos 300
+    ypos 280
 
-image mirror_idle:
-    "objects/mirror/idle/frame_00.png"
+image mirror_idle = "objects/mirror/idle/Mirror.png"
+
+image hammer_idle = "objects/hammer/idle/Hammer.png"
+
+image mirror_hover:
+    "objects/mirror/hover/frame_00.png"
     pause 2.0
-    "objects/mirror/idle/frame_01.png"
+    "objects/mirror/hover/frame_01.png"
     pause 0.1
-    "objects/mirror/idle/frame_02.png"
+    "objects/mirror/hover/frame_02.png"
     pause 0.1
-    "objects/mirror/idle/frame_03.png"
+    "objects/mirror/hover/frame_03.png"
     pause 0.1
-    "objects/mirror/idle/frame_04.png"
+    "objects/mirror/hover/frame_04.png"
     pause 0.1
-    "objects/mirror/idle/frame_05.png"
+    "objects/mirror/hover/frame_05.png"
     pause 0.1
-    "objects/mirror/idle/frame_06.png"
+    "objects/mirror/hover/frame_06.png"
     pause 0.1
-    "objects/mirror/idle/frame_07.png"
+    "objects/mirror/hover/frame_07.png"
     pause 0.1
     repeat
 
-image hammer_idle:
-    "objects/hammer/idle/frame_01.png"
+image hammer_hover:
+    "objects/hammer/hover/frame_01.png"
     pause 2.0
-    "objects/hammer/idle/frame_02.png"
+    "objects/hammer/hover/frame_02.png"
     pause 0.1
-    "objects/hammer/idle/frame_03.png"
+    "objects/hammer/hover/frame_03.png"
     pause 0.1
-    "objects/hammer/idle/frame_04.png"
+    "objects/hammer/hover/frame_04.png"
     pause 0.1
-    "objects/hammer/idle/frame_05.png"
+    "objects/hammer/hover/frame_05.png"
     pause 0.1
-    "objects/hammer/idle/frame_06.png"
+    "objects/hammer/hover/frame_06.png"
     pause 0.1
-    "objects/hammer/idle/frame_07.png"
+    "objects/hammer/hover/frame_07.png"
     pause 0.1
-    "objects/hammer/idle/frame_08.png"
+    "objects/hammer/hover/frame_08.png"
     pause 0.1
-    "objects/hammer/idle/frame_09.png"
+    "objects/hammer/hover/frame_09.png"
     pause 0.1
-    "objects/hammer/idle/frame_10.png"
+    "objects/hammer/hover/frame_10.png"
     pause 0.1
-    "objects/hammer/idle/frame_11.png"
+    "objects/hammer/hover/frame_11.png"
     pause 0.1
-    "objects/hammer/idle/frame_12.png"
+    "objects/hammer/hover/frame_12.png"
     pause 0.1
     repeat
 
@@ -75,12 +79,12 @@ screen PuzzleRoomScreen():
         add "rooms/PuzzleRoom/Puzzle_Room_No_Mirror.png"
     if not 'mirror' in inventory:
         imagebutton:
-            idle "mirror_idle"
+            auto "mirror_%s"
             at resting_on_wall
             action [SensitiveIf(in_room), Jump("Mirror")]
     if not 'hammer' in inventory:
         imagebutton:
-            idle "hammer_idle"
+            auto "hammer_%s"
             at resting_on_table
             action [SensitiveIf(in_room), Jump("Hammer")]
     text "Puzzle Room":

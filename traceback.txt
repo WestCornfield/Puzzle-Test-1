@@ -1,80 +1,88 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 24, in script call
+While loading <'Image' u'objects/mirror/hover/frame_06.png'>:
+  File "game/script.rpy", line 25, in script call
     call MyRoom
-  File "game/script.rpy", line 40, in script call
-    $ check_intro_reactions(current_room)
-  File "game/script.rpy", line 93, in script
-    e "I just entered the puzzle room!"
-  File "game/rooms.rpy", line 48, in execute
-    screen PuzzleRoomScreen():
-  File "game/rooms.rpy", line 48, in execute
-    screen PuzzleRoomScreen():
-  File "game/rooms.rpy", line 50, in execute
-    if not 'hammer' in inventory:
-  File "game/rooms.rpy", line 51, in execute
-    imagebutton:
-  File "game/rooms.rpy", line 51, in keywords
-    imagebutton:
-  File "game/rooms.rpy", line 52, in <module>
-    idle hammer_idle
-NameError: name 'hammer_idle' is not defined
+  File "game/script.rpy", line 46, in script
+    $ renpy.call_screen(current_room + "Screen")
+  File "game/script.rpy", line 46, in <module>
+    $ renpy.call_screen(current_room + "Screen")
+IOError: Couldn't find file 'objects/mirror/hover/frame_06.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 24, in script call
+  File "game/script.rpy", line 25, in script call
     call MyRoom
-  File "game/script.rpy", line 40, in script call
-    $ check_intro_reactions(current_room)
-  File "game/script.rpy", line 93, in script
-    e "I just entered the puzzle room!"
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "/Applications/renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "game/script.rpy", line 46, in script
+    $ renpy.call_screen(current_room + "Screen")
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 928, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/Applications/renpy-7.4.11-sdk/renpy/python.py", line 2245, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/script.rpy", line 46, in <module>
+    $ renpy.call_screen(current_room + "Screen")
+  File "/Applications/renpy-7.4.11-sdk/renpy/exports.py", line 3136, in call_screen
+    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
   File "/Applications/renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 436, in visit_all
-    callback(self)
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 447, in per_interact
-    self.update()
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 637, in update
-    self.screen.function(**self.scope)
-  File "game/rooms.rpy", line 48, in execute
-    screen PuzzleRoomScreen():
-  File "game/rooms.rpy", line 48, in execute
-    screen PuzzleRoomScreen():
-  File "game/rooms.rpy", line 50, in execute
-    if not 'hammer' in inventory:
-  File "game/rooms.rpy", line 51, in execute
-    imagebutton:
-  File "game/rooms.rpy", line 51, in keywords
-    imagebutton:
-  File "game/rooms.rpy", line 52, in <module>
-    idle hammer_idle
-NameError: name 'hammer_idle' is not defined
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 688, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/behavior.py", line 795, in render
+    rv = super(Button, self).render(width, height, st, at)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/layout.py", line 1264, in render
+    st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/im.py", line 625, in render
+    return cache.get(self, render=True)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/im.py", line 287, in get
+    surf = image.load()
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/im.py", line 706, in load
+    raise e
+IOError: Couldn't find file 'objects/mirror/hover/frame_06.png'.
 
 Darwin-21.6.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 Puzzle Test 1 1.0
-Mon Jun 26 14:29:05 2023
+Mon Jun 26 20:29:30 2023
