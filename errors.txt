@@ -2,11 +2,9 @@
 errors listed below, and try again.
 
 
-The label LeaveHammer is defined twice, at File "game/script.rpy", line 88:
-label LeaveHammer:
-and File "game/script.rpy", line 100:
-label LeaveHammer:
-
+File "game/script.rpy", line 82: expected ':' not found.
+    label Nail
+              ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon Jun 26 18:38:00 2023
+Mon Jun 26 23:15:53 2023

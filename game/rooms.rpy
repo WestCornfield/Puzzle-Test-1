@@ -15,35 +15,22 @@ transform option_two_text_button:
     ypos 400
 
 transform resting_on_table:
-    xpos 800
+    xpos 850
     ypos 350
 
 transform resting_on_wall:
     xpos 300
     ypos 280
 
+transform nail_in_wall:
+    xpos 80
+    ypos 200
+
 image mirror_idle = "objects/mirror/idle/Mirror.png"
 
 image hammer_idle = "objects/hammer/idle/Hammer.png"
 
-image mirror_hover:
-    "objects/mirror/hover/frame_00.png"
-    pause 2.0
-    "objects/mirror/hover/frame_01.png"
-    pause 0.1
-    "objects/mirror/hover/frame_02.png"
-    pause 0.1
-    "objects/mirror/hover/frame_03.png"
-    pause 0.1
-    "objects/mirror/hover/frame_04.png"
-    pause 0.1
-    "objects/mirror/hover/frame_05.png"
-    pause 0.1
-    "objects/mirror/hover/frame_06.png"
-    pause 0.1
-    "objects/mirror/hover/frame_07.png"
-    pause 0.1
-    repeat
+image nail_idle = "objects/nail/idle/Nail.png"
 
 image hammer_hover:
     "objects/hammer/hover/frame_01.png"
@@ -72,6 +59,38 @@ image hammer_hover:
     pause 0.1
     repeat
 
+image mirror_hover:
+    "objects/mirror/hover/frame_00.png"
+    pause 2.0
+    "objects/mirror/hover/frame_01.png"
+    pause 0.1
+    "objects/mirror/hover/frame_02.png"
+    pause 0.1
+    "objects/mirror/hover/frame_03.png"
+    pause 0.1
+    "objects/mirror/hover/frame_04.png"
+    pause 0.1
+    "objects/mirror/hover/frame_05.png"
+    pause 0.1
+    "objects/mirror/hover/frame_06.png"
+    pause 0.1
+    "objects/mirror/hover/frame_07.png"
+    pause 0.1
+    repeat
+
+image nail_hover:
+    "objects/nail/hover/frame_00.png"
+    pause 2.0
+    "objects/nail/hover/frame_01.png"
+    pause 0.1
+    "objects/nail/hover/frame_02.png"
+    pause 0.1
+    "objects/nail/hover/frame_03.png"
+    pause 0.1
+    "objects/nail/hover/frame_04.png"
+    pause 0.1
+    repeat
+
 screen PuzzleRoomScreen():
     if mirror_placed:
         add "rooms/PuzzleRoom/Puzzle_Room_No_Mirror.png"
@@ -87,6 +106,11 @@ screen PuzzleRoomScreen():
             auto "hammer_%s"
             at resting_on_table
             action [SensitiveIf(in_room), Jump("Hammer")]
+    if not mirror_placed:
+        imagebutton:
+            auto "nail_%s"
+            at nail_in_wall
+            action [SensitiveIf(in_room), Jump("Nail")]
     text "Puzzle Room":
         at room_text
     text "Move Count: " + str(move_count):

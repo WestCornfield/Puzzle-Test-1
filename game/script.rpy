@@ -79,6 +79,11 @@ label Mirror:
             jump LeaveMirror
     jump MyRoom
 
+label Nail:
+    e "getting tired. Come back to this later."
+
+    jump MyRoom
+
 label TakeMirror:
     $ inventory.append('mirror')
 
