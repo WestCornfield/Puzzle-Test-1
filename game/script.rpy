@@ -13,6 +13,7 @@ default current_room = "PuzzleRoom"
 default previous_room = ""
 
 define inventory = []
+define mirror_placed = False
 
 # The game starts here.
 
@@ -60,6 +61,34 @@ label Hammer:
             jump TakeHammer
         "Leave the hammer where it is":
             jump LeaveHammer
+    jump MyRoom
+
+label Mirror:
+    $ renpy.show_screen(current_room + "Screen")
+
+    e "Against the wall of the puzzle room, there's a mirror."
+
+    e "Interestingly, you don't see your reflection in it... Maybe you're a vampire!"
+
+    e "Pick it up?"
+
+    menu:
+        "Pick up the mirror":
+            jump TakeMirror
+        "Leave the mirror where it is":
+            jump LeaveMirror
+    jump MyRoom
+
+label TakeMirror:
+    $ inventory.append('mirror')
+
+    e "The mirror is now in your inventory!"
+
+    jump MyRoom
+
+label LeaveMirror:
+    e "You leave the mirror where it is."
+
     jump MyRoom
 
 label TakeHammer:

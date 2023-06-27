@@ -18,6 +18,29 @@ transform resting_on_table:
     xpos 800
     ypos 350
 
+transform resting_on_wall:
+    xpos 112
+    ypos 192
+
+image mirror_idle:
+    "objects/mirror/idle/frame_00.png"
+    pause 2.0
+    "objects/mirror/idle/frame_01.png"
+    pause 0.1
+    "objects/mirror/idle/frame_02.png"
+    pause 0.1
+    "objects/mirror/idle/frame_03.png"
+    pause 0.1
+    "objects/mirror/idle/frame_04.png"
+    pause 0.1
+    "objects/mirror/idle/frame_05.png"
+    pause 0.1
+    "objects/mirror/idle/frame_06.png"
+    pause 0.1
+    "objects/mirror/idle/frame_07.png"
+    pause 0.1
+    repeat
+
 image hammer_idle:
     "objects/hammer/idle/frame_01.png"
     pause 2.0
@@ -46,7 +69,15 @@ image hammer_idle:
     repeat
 
 screen PuzzleRoomScreen():
-    add "rooms/Puzzle_Room.png"
+    if mirror_placed:
+        add "rooms/PuzzleRoom/Puzzle_Room_No_Mirror.png"
+    if not mirror_placed:
+        add "rooms/PuzzleRoom/Puzzle_Room_No_Mirror.png"
+    if not 'mirror' in inventory:
+        imagebutton:
+            idle "mirror_idle"
+            at resting_on_wall
+            action [SensitiveIf(in_room), Jump("Mirror")]
     if not 'hammer' in inventory:
         imagebutton:
             idle "hammer_idle"

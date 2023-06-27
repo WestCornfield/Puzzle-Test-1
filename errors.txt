@@ -2,9 +2,11 @@
 errors listed below, and try again.
 
 
-File "game/rooms.rpy", line 23: expected a keyword argument, colon, or end of line.
-    imagebutton "objects/Hammer.png":
-                ^
+The label LeaveHammer is defined twice, at File "game/script.rpy", line 88:
+label LeaveHammer:
+and File "game/script.rpy", line 100:
+label LeaveHammer:
+
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon Jun 26 13:26:04 2023
+Mon Jun 26 18:38:00 2023
