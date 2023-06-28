@@ -34,11 +34,20 @@ transform secret_spot:
     xpos 1136
     ypos 344
 
+transform hidden_panel:
+    xpos 1088
+    ypos 204
+
+transform scroll_location:
+    xpos 1132
+    ypos 316
+
 image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
 image mirror_idle = "objects/mirror/idle/Mirror.png"
 image hammer_idle = "objects/hammer/idle/Hammer.png"
 image nail_idle = "objects/nail/idle/Nail.png"
-
+image busted_wall_idle = "objects/busted_wall/idle_with_scroll.png"
+image scroll_idle = "objects/scroll/idle/scroll.png"
 image secret_spot_idle = "objects/secret_spot/idle/Spot.png"
 
 image hanging_mirror_hover:
@@ -121,6 +130,16 @@ image nail_hover:
 
 screen PuzzleRoomScreen():
     add "rooms/PuzzleRoom/Puzzle_Room_Basic.png"
+    if wall_smashed:
+        imagebutton:
+            idle "busted_wall_idle"
+            at hidden_panel
+            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("BustedWall")]
+    if wall_smashed and not 'scroll' in inventory:
+        imagebutton:
+            idle "scroll_idle"
+            at scroll_location
+            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Scroll")]
     if not mirror_placed and not 'mirror' in inventory:
         imagebutton:
             auto "mirror_%s"
@@ -141,10 +160,11 @@ screen PuzzleRoomScreen():
             auto "hanging_mirror_%s"
             at mirror_on_wall
             action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("HangingMirror")]
-    imagebutton:
-        idle "secret_spot_idle"
-        at secret_spot
-        action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("SecretSpot")]
+    if not wall_smashed:
+        imagebutton:
+            idle "secret_spot_idle"
+            at secret_spot
+            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("SecretSpot")]
     text "Puzzle Room":
         at room_text
     text "Move Count: " + str(move_count):

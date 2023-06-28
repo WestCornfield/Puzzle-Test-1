@@ -15,6 +15,7 @@ default previous_room = ""
 define inventory = []
 define inside_option = False
 define mirror_placed = False
+define wall_smashed = False
 
 # The game starts here.
 
@@ -98,6 +99,46 @@ label Nail:
 
     jump MyRoom
 
+label BustedWall:
+    $ renpy.show_screen(current_room + "Screen")
+
+    e "Oh, wow! Must have been a false wall!"
+
+    e "Those panels just flew right off!"
+
+    $ inside_option = False
+
+    jump MyRoom
+
+label Scroll:
+    $ renpy.show_screen(current_room + "Screen")
+
+    e "Pasted inside the panel you broken open..."
+
+    e "Is a... scroll with writing on it?"
+
+    menu:
+        "Read the scroll?":
+            jump ReadScroll
+        "Don't read the scroll?":
+            jump DontReadScroll
+
+label ReadScroll:
+    e "You lean up close to the wall to read it..."
+
+    e "{i}Rood nepo{i}..."
+
+    jump OpenDoor
+
+label OpenDoor:
+    e "Wow! The Rock Door slides open!"
+
+    e "You escape the room!"
+
+    e "You win!"
+
+    jump EndGame
+
 label HangMirror:
     $ mirror_placed = True
 
@@ -148,7 +189,9 @@ label CantTakeNail:
 label HitSpot:
     e "You reel back... And hit the spot with your hammer!"
 
-    e "This is where the solution goes, one sec..."
+    $ wall_smashed = True
+
+    e "Wham! The wall caves in! And a secret panel opens!"
 
     $ inside_option = False
 

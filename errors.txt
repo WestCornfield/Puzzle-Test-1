@@ -2,9 +2,21 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 129: expected ':' not found.
-    menu
-        ^
+File "game/rooms.rpy", line 41: unexpected EOF while parsing
+    "objects/busted_wall/idle/idle.png";
+                                        ^
+
+File "game/rooms.rpy", line 42: unexpected EOF while parsing
+    "objects/scroll/idle/scroll.png";
+                                     ^
+
+File "game/rooms.rpy", line 43: unexpected EOF while parsing
+    "objects/secret_spot/idle/Spot.png";
+                                        ^
+
+File "game/script.rpy", line 121: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
+    "Read the scroll?"
+                      ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Tue Jun 27 17:58:02 2023
+Tue Jun 27 19:44:40 2023
