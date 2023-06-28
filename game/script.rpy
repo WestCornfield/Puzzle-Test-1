@@ -12,6 +12,8 @@ default move_count = 0
 default current_room = "PuzzleRoom"
 default previous_room = ""
 
+define audio.rock_smash = "audio/sounds/rock_smash.mp3"
+
 define inventory = []
 define inside_option = False
 define mirror_placed = False
@@ -239,7 +241,10 @@ label CantTakeNail:
     jump MyRoom
 
 label HitSpot:
-    e "You reel back... And hit the spot with your hammer!"
+    e "You reel back your mighty hammer..."
+
+    play sound rock_smash
+    with Shake((0, 0, 0, 0), 0.5, dist=5)
 
     $ wall_smashed = True
 
