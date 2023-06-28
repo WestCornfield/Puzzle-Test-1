@@ -13,6 +13,7 @@ default current_room = "PuzzleRoom"
 default previous_room = ""
 
 define audio.rock_smash = "audio/sounds/rock_smash.mp3"
+define audio.stone_slide = "audio/sounds/stone_slide.mp3"
 
 define inventory = []
 define inside_option = False
@@ -185,6 +186,8 @@ label ReadScroll:
     jump OpenDoor
 
 label OpenDoor:
+    play sound stone_slide
+
     e "Wow! The Rock Door slides open!"
 
     e "You escape the room!"
