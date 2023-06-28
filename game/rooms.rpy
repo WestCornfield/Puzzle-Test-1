@@ -42,6 +42,10 @@ transform scroll_location:
     xpos 1132
     ypos 316
 
+transform door_location:
+    xpos 464
+    ypos 176
+
 image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
 image mirror_idle = "objects/mirror/idle/Mirror.png"
 image hammer_idle = "objects/hammer/idle/Hammer.png"
@@ -49,6 +53,39 @@ image nail_idle = "objects/nail/idle/Nail.png"
 image busted_wall_idle = "objects/busted_wall/idle_with_scroll.png"
 image scroll_idle = "objects/scroll/idle/scroll.png"
 image secret_spot_idle = "objects/secret_spot/idle/Spot.png"
+image rock_door_closed_idle = "objects/doors/rock_door/idle/closed/rock_door.png"
+image rock_door_open_idle = "objects/doors/rock_door/idle/open/rock_door.png"
+
+image rock_door_opening:
+    "objects/doors/rock_door/animation/opening_animation/frame_01.png"
+    pause 0.5
+    "objects/doors/rock_door/animation/opening_animation/frame_02.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_03.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_04.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_05.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_06.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_07.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_08.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_09.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_10.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_11.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_12.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_13.png"
+    pause 0.1
+    "objects/doors/rock_door/animation/opening_animation/frame_14.png"
+    pause 0.1
+
 
 image hanging_mirror_hover:
     "objects/mirror/hanged/hover/frame_00.png"
@@ -140,6 +177,15 @@ screen PuzzleRoomScreen():
             idle "scroll_idle"
             at scroll_location
             action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Scroll")]
+    if not scroll_read:
+        imagebutton:
+            idle "rock_door_closed_idle"
+            at door_location
+            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Door")]
+    if scroll_read:
+        imagebutton:
+            idle "rock_door_opening"
+            at door_location
     if not mirror_placed and not 'mirror' in inventory:
         imagebutton:
             auto "mirror_%s"

@@ -16,6 +16,7 @@ define inventory = []
 define inside_option = False
 define mirror_placed = False
 define wall_smashed = False
+define scroll_read = False
 
 # The game starts here.
 
@@ -49,6 +50,56 @@ label MyRoom:
 
     return
 
+label Door:
+    $ renpy.show_screen(current_room + "Screen")
+
+    e "You move to leave the room, but there's a large stone in the way."
+
+    menu:
+        "Turn the doorknob":
+            jump NoDoorKnob
+        "Politely knock":
+            jump KnockOnStone
+        "Wink at the rock":
+            jump WinkAtRock
+
+label NoDoorKnob:
+    e "...Uh."
+
+    e "Nope. No doorknob here."
+
+    e "Just a big rock."
+
+    $ inside_option = False
+
+    jump MyRoom
+
+label KnockOnStone:
+    e "You politely knock twice."
+
+    e "..."
+
+    e "No answer."
+
+    e "Probably because it's not a door. It's a rock."
+
+    $ inside_option = False
+
+    jump MyRoom
+
+label WinkAtRock:
+    e "You wink at the rock."
+
+    e "..."
+
+    e "Nothing happens."
+
+    e "Which... what did you think would happen?"
+
+    $ inside_option = False
+
+    jump MyRoom
+
 label Hammer:
     $ renpy.show_screen(current_room + "Screen")
 
@@ -63,8 +114,6 @@ label Hammer:
             jump TakeHammer
         "Leave the hammer where it is":
             jump LeaveHammer
-
-    jump MyRoom
 
 label Mirror:
     $ renpy.show_screen(current_room + "Screen")
@@ -128,6 +177,8 @@ label ReadScroll:
 
     e "{i}Rood nepo{i}..."
 
+    $ scroll_read = True
+
     jump OpenDoor
 
 label OpenDoor:
@@ -156,6 +207,8 @@ label HangingMirror:
     $ renpy.show_screen(current_room + "Screen")
 
     e "Hey! It looks like that X in the center of the mirror is pointing to the opposite wall."
+
+    $ inside_option = False
 
     jump MyRoom
 

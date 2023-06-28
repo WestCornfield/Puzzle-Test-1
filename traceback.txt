@@ -1,19 +1,19 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <'Image' u'objects/busted_wall/idle/idle.png'>:
-  File "game/script.rpy", line 27, in script call
+While loading <'Image' u'objects/doors/rock_door/opening_animation/frame_01.png'>:
+  File "game/script.rpy", line 28, in script call
     call MyRoom
-  File "game/script.rpy", line 194, in script
-    e "Wham! The wall caves in! And a secret panel opens!"
-IOError: Couldn't find file 'objects/busted_wall/idle/idle.png'.
+  File "game/script.rpy", line 185, in script
+    e "Wow! The Rock Door slides open!"
+IOError: Couldn't find file 'objects/doors/rock_door/opening_animation/frame_01.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 27, in script call
+  File "game/script.rpy", line 28, in script call
     call MyRoom
-  File "game/script.rpy", line 194, in script
-    e "Wham! The wall caves in! And a secret panel opens!"
+  File "game/script.rpy", line 185, in script
+    e "Wow! The Rock Door slides open!"
   File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
     renpy.exports.say(who, what, *args, **kwargs)
   File "/Applications/renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
@@ -70,15 +70,19 @@ Full traceback:
     rend = render(child, w, h, st, at)
   File "render.pyx", line 170, in renpy.display.render.render
   File "render.pyx", line 263, in renpy.display.render.render
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
   File "/Applications/renpy-7.4.11-sdk/renpy/display/im.py", line 625, in render
     return cache.get(self, render=True)
   File "/Applications/renpy-7.4.11-sdk/renpy/display/im.py", line 287, in get
     surf = image.load()
   File "/Applications/renpy-7.4.11-sdk/renpy/display/im.py", line 706, in load
     raise e
-IOError: Couldn't find file 'objects/busted_wall/idle/idle.png'.
+IOError: Couldn't find file 'objects/doors/rock_door/opening_animation/frame_01.png'.
 
 Darwin-21.6.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 Puzzle Test 1 1.0
-Tue Jun 27 19:46:47 2023
+Tue Jun 27 22:14:54 2023
