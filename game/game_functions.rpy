@@ -8,6 +8,4 @@ init python:
     def check_intro_reactions(room):
         if room == "PuzzleRoom":
             renpy.call("EnterPuzzleRoom")
-        elif room == "DiningRoom":
-            renpy.call("EnterDiningRoom")
         return

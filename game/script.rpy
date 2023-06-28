@@ -46,6 +46,7 @@ label MyRoom:
 
     #Enable scene interactivity
     $ in_room = True
+    $ _window_hide()
     $ renpy.call_screen(current_room + "Screen")
 
     return
@@ -186,9 +187,7 @@ label OpenDoor:
 
     e "You escape the room!"
 
-    e "You win!"
-
-    jump EndGame
+    return
 
 label HangMirror:
     $ mirror_placed = True
@@ -307,27 +306,13 @@ label LeaveHammer:
 
     jump MyRoom
 
-label EndGame:
-    e "Let's finish the game!"
-
-    return
-
-label LookAtDinner:
-
-    $ in_room = False
-
-    $ renpy.show_screen(current_room + "Screen")
-
-    e "Oooh! Looks like we're having pizza!"
-
-    jump MyRoom
-
 label EnterPuzzleRoom:
-    e "I just entered the puzzle room!"
+    e "You wake up in a mysterious room."
 
-    return
+    e "You don't remember how you arrived here. But..."
 
-label EnterDiningRoom:
-    e "I just entered the dining room!"
+    e "Or, perhaps, for that reason."
+
+    e "You decide you'd like to leave."
 
     return
