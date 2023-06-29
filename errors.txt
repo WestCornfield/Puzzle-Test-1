@@ -2,8 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/rooms.rpy", line 166: is not terminated with a newline. (Check strings and parenthesis.)
-                action [SensitiveIf(not inside_option), SetVariable("open_menu", If(open_menu, False, True)]
+File "game/rooms.rpy", line 186: expected a keyword argument or child statement.
+    "user_interface_idle"
+    ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Thu Jun 29 11:52:10 2023
+Thu Jun 29 15:36:02 2023

@@ -34,9 +34,22 @@ transform dropdown_button_location:
     ypos 0
     xpos 568
 
+transform open_dropdown_button_location:
+    ypos 0
+    xpos 568
+    ease 1 xpos 568 ypos 128
+    ease 1 xpos 568 ypos 112
+
+transform open_user_interface_location:
+    ypos -130
+    xpos 0
+    ease 1 xpos 0 ypos 0
+    ease 1 xpos 0 ypos -16
+
 #user interface idle assets
 image dropdown_button_idle = "user_interface/dropdown/button/idle/Dropdown_Button.png"
-image dropdown_button_inversed_idle = "user_interface/dropdown/button/idle/Dropdown_Button_inversed.png"
+image dropdown_button_inversed_idle = "user_interface/dropdown/button/idle/Dropdown_Button_inversed_resized.png"
+image user_interface_idle = "user_interface/dropdown/interaction_panel/interaction_panel_resized.png"
 
 #in-game idle assets
 image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
@@ -167,8 +180,11 @@ screen PuzzleRoomScreen():
     if open_menu:
         imagebutton:
             idle "dropdown_button_inversed_idle"
-            at dropdown_button_location
+            at open_dropdown_button_location
             action [SensitiveIf(not inside_option), SetVariable("open_menu", False)]
+        imagebutton:
+            idle "user_interface_idle"
+            at open_user_interface_location
     if wall_smashed:
         imagebutton:
             idle "busted_wall_idle"
