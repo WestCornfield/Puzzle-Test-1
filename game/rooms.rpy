@@ -30,6 +30,15 @@ transform door_location:
     xpos 464
     ypos 176
 
+transform dropdown_button_location:
+    ypos 0
+    xpos 568
+
+#user interface idle assets
+image dropdown_button_idle = "user_interface/dropdown/button/idle/Dropdown_Button.png"
+image dropdown_button_inversed_idle = "user_interface/dropdown/button/idle/Dropdown_Button_inversed.png"
+
+#in-game idle assets
 image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
 image mirror_idle = "objects/mirror/idle/Mirror.png"
 image hammer_idle = "objects/hammer/idle/Hammer.png"
@@ -69,7 +78,6 @@ image rock_door_opening:
     pause 0.1
     "objects/doors/rock_door/animation/opening_animation/frame_14.png"
     pause 0.1
-
 
 image hanging_mirror_hover:
     "objects/mirror/hanged/hover/frame_00.png"
@@ -151,6 +159,16 @@ image nail_hover:
 
 screen PuzzleRoomScreen():
     add "rooms/PuzzleRoom/Puzzle_Room_Basic.png"
+    if not open_menu:
+        imagebutton:
+            idle "dropdown_button_idle"
+            at dropdown_button_location
+            action [SensitiveIf(not inside_option), SetVariable("open_menu", True)]
+    if open_menu:
+        imagebutton:
+            idle "dropdown_button_inversed_idle"
+            at dropdown_button_location
+            action [SensitiveIf(not inside_option), SetVariable("open_menu", False)]
     if wall_smashed:
         imagebutton:
             idle "busted_wall_idle"

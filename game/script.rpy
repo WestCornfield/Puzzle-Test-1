@@ -21,6 +21,8 @@ define mirror_placed = False
 define wall_smashed = False
 define scroll_read = False
 
+define open_menu = False
+
 # The game starts here.
 
 label start:

@@ -2,21 +2,8 @@
 errors listed below, and try again.
 
 
-File "game/rooms.rpy", line 41: unexpected EOF while parsing
-    "objects/busted_wall/idle/idle.png";
-                                        ^
-
-File "game/rooms.rpy", line 42: unexpected EOF while parsing
-    "objects/scroll/idle/scroll.png";
-                                     ^
-
-File "game/rooms.rpy", line 43: unexpected EOF while parsing
-    "objects/secret_spot/idle/Spot.png";
-                                        ^
-
-File "game/script.rpy", line 121: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
-    "Read the scroll?"
-                      ^
+File "game/rooms.rpy", line 166: is not terminated with a newline. (Check strings and parenthesis.)
+                action [SensitiveIf(not inside_option), SetVariable("open_menu", If(open_menu, False, True)]
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Tue Jun 27 19:44:40 2023
+Thu Jun 29 11:52:10 2023
