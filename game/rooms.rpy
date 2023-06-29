@@ -46,10 +46,39 @@ transform open_user_interface_location:
     ease 1 xpos 0 ypos 0
     ease 1 xpos 0 ypos -16
 
+transform open_look_button_location:
+    ypos -110
+    xpos 28
+    ease 1 xpos 28 ypos 32
+    ease 1 xpos 28 ypos 16
+
+transform open_talk_button_location:
+    ypos -110
+    xpos 132
+    ease 1 xpos 132 ypos 28
+    ease 1 xpos 132 ypos 12
+
+transform open_take_button_location:
+    ypos -110
+    xpos 248
+    ease 1 xpos 248 ypos 28
+    ease 1 xpos 248 ypos 12
+
+transform open_inventory_button_location:
+    ypos -110
+    xpos 352
+    ease 1 xpos 352 ypos 28
+    ease 1 xpos 352 ypos 12
+
 #user interface idle assets
 image dropdown_button_idle = "user_interface/dropdown/button/idle/Dropdown_Button.png"
 image dropdown_button_inversed_idle = "user_interface/dropdown/button/idle/Dropdown_Button_inversed_resized.png"
 image user_interface_idle = "user_interface/dropdown/interaction_panel/interaction_panel_resized.png"
+
+image look_button_idle = "user_interface/icons/look/idle/eyeball.png"
+image talk_button_idle = "user_interface/icons/talk/idle/talk.png"
+image take_button_idle = "user_interface/icons/take/idle/take.png"
+image inventory_button_idle = "user_interface/icons/inventory/idle/inventory.png"
 
 #in-game idle assets
 image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
@@ -185,6 +214,18 @@ screen PuzzleRoomScreen():
         imagebutton:
             idle "user_interface_idle"
             at open_user_interface_location
+        imagebutton:
+            idle "look_button_idle"
+            at open_look_button_location
+        imagebutton:
+            idle "talk_button_idle"
+            at open_talk_button_location
+        imagebutton:
+            idle "take_button_idle"
+            at open_take_button_location
+        imagebutton:
+            idle "inventory_button_idle"
+            at open_inventory_button_location
     if wall_smashed:
         imagebutton:
             idle "busted_wall_idle"
