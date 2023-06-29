@@ -80,6 +80,52 @@ image talk_button_idle = "user_interface/icons/talk/idle/talk.png"
 image take_button_idle = "user_interface/icons/take/idle/take.png"
 image inventory_button_idle = "user_interface/icons/inventory/idle/inventory.png"
 
+#user interface hover assets
+image look_button_hover:
+    "user_interface/icons/look/hover/frame_00.png"
+    pause 0.5
+    "user_interface/icons/look/hover/frame_01.png"
+    pause 0.1
+    "user_interface/icons/look/hover/frame_02.png"
+    pause 0.3
+    "user_interface/icons/look/hover/frame_01.png"
+    pause 0.1
+    "user_interface/icons/look/hover/frame_00.png"
+    pause 0.1
+    "user_interface/icons/look/hover/frame_03.png"
+    pause 0.1
+    "user_interface/icons/look/hover/frame_04.png"
+    pause 0.3
+    "user_interface/icons/look/hover/frame_03.png"
+    pause 0.1
+    repeat
+
+image talk_button_hover:
+    "user_interface/icons/talk/hover/frame_00.png"
+    pause 0.5
+    "user_interface/icons/talk/hover/frame_01.png"
+    pause 0.1
+    "user_interface/icons/talk/hover/frame_02.png"
+    pause 0.1
+    "user_interface/icons/talk/hover/frame_03.png"
+    pause 0.1
+    repeat
+
+image take_button_hover:
+    "user_interface/icons/take/hover/frame_00.png"
+    pause 0.5
+    "user_interface/icons/take/hover/frame_01.png"
+    pause 0.1
+    "user_interface/icons/take/hover/frame_02.png"
+    pause 0.1
+    "user_interface/icons/take/hover/frame_03.png"
+    pause 0.5
+    "user_interface/icons/take/hover/frame_02.png"
+    pause 0.1
+    "user_interface/icons/take/hover/frame_01.png"
+    pause 0.1
+    repeat
+
 #in-game idle assets
 image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
 image mirror_idle = "objects/mirror/idle/Mirror.png"
@@ -215,14 +261,17 @@ screen PuzzleRoomScreen():
             idle "user_interface_idle"
             at open_user_interface_location
         imagebutton:
-            idle "look_button_idle"
+            auto "look_button_%s"
             at open_look_button_location
+            action [SensitiveIf(not inside_option), SetVariable("active_action", 'look')]
         imagebutton:
-            idle "talk_button_idle"
+            auto "talk_button_%s"
             at open_talk_button_location
+            action [SensitiveIf(not inside_option), SetVariable("active_action", 'talk')]
         imagebutton:
-            idle "take_button_idle"
+            auto "take_button_%s"
             at open_take_button_location
+            action [SensitiveIf(not inside_option), SetVariable("active_action", 'take')]
         imagebutton:
             idle "inventory_button_idle"
             at open_inventory_button_location
