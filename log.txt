@@ -45,3 +45,10 @@ Version: '2.1 INTEL-18.8.5'
 Display Info: None
 Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(2560, 1440)
 Maximum texture size: 4096x4096
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.01s
+Load screen analysis took 0.03s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
