@@ -297,17 +297,17 @@ screen PuzzleRoomScreen():
         imagebutton:
             idle "busted_wall_idle"
             at hidden_panel
-            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("BustedWall")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("open_menu", False), SetVariable("inside_option", True), Jump("BustedWall")]
     if wall_smashed and not 'scroll' in inventory:
         imagebutton:
             idle "scroll_idle"
             at scroll_location
-            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Scroll")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("open_menu", False), SetVariable("inside_option", True), Jump("Scroll")]
     if not scroll_read:
         imagebutton:
             idle "rock_door_closed_idle"
             at door_location
-            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Door")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("open_menu", False), SetVariable("inside_option", True), Jump("Door")]
     if scroll_read:
         imagebutton:
             idle "rock_door_opening"
@@ -316,24 +316,24 @@ screen PuzzleRoomScreen():
         imagebutton:
             auto "mirror_%s"
             at resting_on_wall
-            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Mirror")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("open_menu", False), SetVariable("open_menu", False), SetVariable("inside_option", True), Jump("Mirror")]
     if not 'hammer' in inventory:
         imagebutton:
             auto "hammer_%s"
             at resting_on_table
-            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Hammer")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("open_menu", False), SetVariable("inside_option", True), Jump("Hammer")]
     if not mirror_placed:
         imagebutton:
             auto "nail_%s"
             at nail_in_wall
-            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("Nail")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("open_menu", False), SetVariable("inside_option", True), Jump("Nail")]
     if mirror_placed:
         imagebutton:
             auto "hanging_mirror_%s"
             at mirror_on_wall
-            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("HangingMirror")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("open_menu", False), SetVariable("inside_option", True), Jump("HangingMirror")]
     if not wall_smashed:
         imagebutton:
             idle "secret_spot_idle"
             at secret_spot
-            action [SensitiveIf(in_room and not inside_option), SetVariable("inside_option", True), Jump("SecretSpot")]
+            action [SensitiveIf(in_room and not inside_option), SetVariable("open_menu", False), SetVariable("inside_option", True), Jump("SecretSpot")]
