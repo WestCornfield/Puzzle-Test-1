@@ -126,6 +126,23 @@ image take_button_hover:
     pause 0.1
     repeat
 
+image inventory_button_hover:
+    "user_interface/icons/inventory/hover/frame_00.png"
+    pause 1
+    "user_interface/icons/inventory/hover/frame_01.png"
+    pause 0.1
+    "user_interface/icons/inventory/hover/frame_02.png"
+    pause 0.3
+    "user_interface/icons/inventory/hover/frame_03.png"
+    pause 0.1
+    "user_interface/icons/inventory/hover/frame_04.png"
+    pause 0.1
+    "user_interface/icons/inventory/hover/frame_02.png"
+    pause 1
+    "user_interface/icons/inventory/hover/frame_01.png"
+    pause 0.1
+    repeat
+
 #in-game idle assets
 image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
 image mirror_idle = "objects/mirror/idle/Mirror.png"
@@ -273,8 +290,9 @@ screen PuzzleRoomScreen():
             at open_take_button_location
             action [SensitiveIf(not inside_option), SetVariable("active_action", 'take')]
         imagebutton:
-            idle "inventory_button_idle"
+            auto "inventory_button_%s"
             at open_inventory_button_location
+            action [SensitiveIf(not inside_option), SetVariable("active_action", 'take')]
     if wall_smashed:
         imagebutton:
             idle "busted_wall_idle"
