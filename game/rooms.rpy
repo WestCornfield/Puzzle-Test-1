@@ -70,6 +70,30 @@ transform open_inventory_button_location:
     ease 1 xpos 352 ypos 28
     ease 1 xpos 352 ypos 12
 
+transform root_inventory_menu_location:
+    ypos 100
+    xpos 100
+
+transform up_arrow_inventory_location:
+    ypos 125
+    xpos 1000
+
+transform down_arrow_inventory_location:
+    ypos 275
+    xpos 1000
+
+transform look_inventory_location:
+    ypos 380
+    xpos 130
+
+transform use_inventory_location:
+    ypos 380
+    xpos 270
+
+transform close_inventory_location:
+    ypos 380
+    xpos 710
+
 #user interface idle assets
 image dropdown_button_idle = "user_interface/dropdown/button/idle/Dropdown_Button.png"
 image dropdown_button_inversed_idle = "user_interface/dropdown/button/idle/Dropdown_Button_inversed_resized.png"
@@ -79,6 +103,14 @@ image look_button_idle = "user_interface/icons/look/idle/eyeball.png"
 image talk_button_idle = "user_interface/icons/talk/idle/talk.png"
 image take_button_idle = "user_interface/icons/take/idle/take.png"
 image inventory_button_idle = "user_interface/icons/inventory/idle/inventory.png"
+
+#inventory interface idle assets
+image root_inventory_idle = "user_interface/inventory/background/root/idle/root_inventory_menu.png"
+image up_arrow_inventory_idle = "user_interface/inventory/background/icons/up_arrow/idle.png"
+image down_arrow_inventory_idle = "user_interface/inventory/background/icons/down_arrow/idle.png"
+image look_inventory_idle = "user_interface/inventory/background/icons/look/idle.png"
+image use_inventory_idle = "user_interface/inventory/background/icons/use/idle.png"
+image close_inventory_idle = "user_interface/inventory/background/icons/close/idle.png"
 
 #user interface hover assets
 image look_button_hover:
@@ -264,12 +296,12 @@ image nail_hover:
 
 screen PuzzleRoomScreen():
     add "rooms/PuzzleRoom/Puzzle_Room_Basic.png"
-    if not open_menu:
+    if not open_menu and not open_inventory:
         imagebutton:
             idle "dropdown_button_idle"
             at dropdown_button_location
             action [SensitiveIf(not inside_option), SetVariable("open_menu", True)]
-    if open_menu:
+    if open_menu and not open_inventory:
         imagebutton:
             idle "dropdown_button_inversed_idle"
             at open_dropdown_button_location
@@ -292,7 +324,7 @@ screen PuzzleRoomScreen():
         imagebutton:
             auto "inventory_button_%s"
             at open_inventory_button_location
-            action [SensitiveIf(not inside_option), SetVariable("active_action", 'take')]
+            action [SensitiveIf(not inside_option), SetVariable("open_menu", False), SetVariable("open_inventory", True)]
     if wall_smashed:
         imagebutton:
             idle "busted_wall_idle"
@@ -337,3 +369,23 @@ screen PuzzleRoomScreen():
             idle "secret_spot_idle"
             at secret_spot
             action [SensitiveIf(in_room and not inside_option), SetVariable("open_menu", False), SetVariable("inside_option", True), Jump("SecretSpot")]
+    if open_inventory:
+        imagebutton:
+            idle "root_inventory_idle"
+            at root_inventory_menu_location
+        imagebutton:
+            idle "up_arrow_inventory_idle"
+            at up_arrow_inventory_location
+        imagebutton:
+            idle "down_arrow_inventory_idle"
+            at down_arrow_inventory_location
+        imagebutton:
+            idle "look_inventory_idle"
+            at look_inventory_location
+        imagebutton:
+            idle "use_inventory_idle"
+            at use_inventory_location
+        imagebutton:
+            idle "close_inventory_idle"
+            at close_inventory_location
+            action [SensitiveIf(in_room and not inside_option), SetVariable("open_inventory", False)]
