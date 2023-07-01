@@ -59,8 +59,14 @@ label MyRoom:
 
     return
 
-label Door:
+label handleObjectClick:
     $ renpy.show_screen(current_room + "Screen")
+    $ open_menu = False
+    $ inside_option = True
+    return
+
+label Door:
+    call handleObjectClick
 
     e "You move to leave the room, but there's a large stone in the way."
 
@@ -110,7 +116,7 @@ label WinkAtRock:
     jump MyRoom
 
 label Hammer:
-    $ renpy.show_screen(current_room + "Screen")
+    call handleObjectClick
 
     e "On the table in the puzzle room, there's a hammer."
 
@@ -125,7 +131,7 @@ label Hammer:
             jump LeaveHammer
 
 label Mirror:
-    $ renpy.show_screen(current_room + "Screen")
+    call handleObjectClick
 
     e "Against the wall of the puzzle room, there's a mirror."
 
@@ -141,7 +147,7 @@ label Mirror:
     jump MyRoom
 
 label Nail:
-    $ renpy.show_screen(current_room + "Screen")
+    call handleObjectClick
 
     e "You see a nail sticking out of the wall."
 
@@ -158,7 +164,7 @@ label Nail:
     jump MyRoom
 
 label BustedWall:
-    $ renpy.show_screen(current_room + "Screen")
+    call handleObjectClick
 
     e "Oh, wow! Must have been a false wall!"
 
@@ -169,7 +175,7 @@ label BustedWall:
     jump MyRoom
 
 label Scroll:
-    $ renpy.show_screen(current_room + "Screen")
+    call handleObjectClick
 
     e "Pasted inside the panel you broken open..."
 
@@ -191,7 +197,7 @@ label ReadScroll:
     jump OpenDoor
 
 label OpenDoor:
-    play sound stone_slide
+    call handleObjectClick
 
     e "Wow! The Rock Door slides open!"
 
@@ -213,7 +219,7 @@ label HangMirror:
     jump MyRoom
 
 label HangingMirror:
-    $ renpy.show_screen(current_room + "Screen")
+    call handleObjectClick
 
     e "Hey! It looks like that X in the center of the mirror is pointing to the opposite wall."
 
@@ -222,7 +228,7 @@ label HangingMirror:
     jump MyRoom
 
 label SecretSpot:
-    $ renpy.show_screen(current_room + "Screen")
+    call handleObjectClick
 
     if not mirror_placed:
         e "Your eye catches a spot in the wall. You're not sure why..."
