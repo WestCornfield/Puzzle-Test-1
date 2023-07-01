@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/rooms.rpy", line 376: u'zorder' is not a keyword argument or valid child for the imagebutton statement.
-    zorder 5
-          ^
+File "game/rooms.rpy", line 400: u'idle' is not a keyword argument or valid child for the for statement.
+    idle "{}_inventory_icon".format(item)
+        ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat Jul  1 00:30:00 2023
+Sat Jul  1 18:09:15 2023

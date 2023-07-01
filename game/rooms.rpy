@@ -94,6 +94,10 @@ transform close_inventory_location:
     ypos 380
     xpos 710
 
+transform inventory_spot(spot_number):
+    ypos 140
+    xpos (150 + (spot_number * 100))
+
 #user interface idle assets
 image dropdown_button_idle = "user_interface/dropdown/button/idle/Dropdown_Button.png"
 image dropdown_button_inversed_idle = "user_interface/dropdown/button/idle/Dropdown_Button_inversed_resized.png"
@@ -111,6 +115,9 @@ image down_arrow_inventory_idle = "user_interface/inventory/background/icons/dow
 image look_inventory_idle = "user_interface/inventory/background/icons/look/idle.png"
 image use_inventory_idle = "user_interface/inventory/background/icons/use/idle.png"
 image close_inventory_idle = "user_interface/inventory/background/icons/close/idle.png"
+
+image hammer_inventory_icon = "user_interface/inventory/icons/hammer/idle/hammer.png"
+image mirror_inventory_icon = "user_interface/inventory/icons/mirror/idle/mirror.png"
 
 #user interface hover assets
 image look_button_hover:
@@ -389,3 +396,8 @@ screen PuzzleRoomScreen():
             idle "close_inventory_idle"
             at close_inventory_location
             action [SensitiveIf(in_room and not inside_option), SetVariable("open_inventory", False)]
+        for item in inventory:
+            imagebutton:
+                idle "{}_inventory_icon".format(item)
+                at inventory_spot(inventory.index(item))
+                action [SensitiveIf(in_room and not inside_option), SetVariable("selected_item", item)]

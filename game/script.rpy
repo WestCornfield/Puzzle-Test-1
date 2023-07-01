@@ -24,6 +24,7 @@ define scroll_read = False
 define open_menu = False
 define open_inventory = False
 define active_action = ''
+define selected_item = ''
 
 # The game starts here.
 
