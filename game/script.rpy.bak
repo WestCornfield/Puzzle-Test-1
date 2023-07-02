@@ -34,7 +34,7 @@ label start:
 
     #Call the first scene
     $ current_room = "PuzzleRoom"
-    call MyRoom from _call_MyRoom
+    call MyRoom
 
     e "You finished the game!"
 
@@ -115,18 +115,18 @@ label handleInventoryObjectClick(object=''):
     jump MyRoom
 
 label Door:
-    call handleObjectClick from _call_handleObjectClick
+    call handleObjectClick
 
     if active_action == 'take' or active_action == '':
         e "You move to leave the room, but there's a large stone in the way."
 
         menu:
             "Turn the doorknob":
-                call NoDoorKnob from _call_NoDoorKnob
+                call NoDoorKnob
             "Politely knock":
-                call KnockOnStone from _call_KnockOnStone
+                call KnockOnStone
             "Wink at the rock":
-                call WinkAtRock from _call_WinkAtRock
+                call WinkAtRock
 
     elif active_action == 'look':
         e "On the other side of the room, is a large stone slab where a door usually would go."
@@ -139,7 +139,7 @@ label Door:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp
+    call handleObjectClickWrapUp
 
     jump MyRoom
 
@@ -167,10 +167,10 @@ label WinkAtRock:
     return
 
 label Hammer:
-    call handleObjectClick from _call_handleObjectClick_1
+    call handleObjectClick
 
     if active_action == 'take' or active_action == '':
-        call TakeHammer from _call_TakeHammer
+        call TakeHammer
 
     elif active_action == 'look':
         e "On the table in the puzzle room, there's a hammer."
@@ -183,15 +183,15 @@ label Hammer:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_1
+    call handleObjectClickWrapUp
 
     jump MyRoom
 
 label Mirror:
-    call handleObjectClick from _call_handleObjectClick_2
+    call handleObjectClick
 
     if active_action == 'take' or active_action == '':
-        call TakeMirror from _call_TakeMirror
+        call TakeMirror
     elif active_action == 'look':
         e "Against the wall of the puzzle room, there's a mirror."
         e "It looks like it has a black X on its center... What could that mean?"
@@ -203,17 +203,17 @@ label Mirror:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_2
+    call handleObjectClickWrapUp
 
     jump MyRoom
 
 label Nail:
-    call handleObjectClick from _call_handleObjectClick_3
+    call handleObjectClick
 
     if selected_item == 'mirror':
-        call HangMirror from _call_HangMirror
+        call HangMirror
     elif active_action == 'take' or active_action == '':
-        call CantTakeNail from _call_CantTakeNail
+        call CantTakeNail
     elif active_action == 'look':
         e "You see a nail sticking out of the wall."
     elif active_action == 'talk':
@@ -223,24 +223,24 @@ label Nail:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_3
+    call handleObjectClickWrapUp
 
     jump MyRoom
 
 label BustedWall:
-    call handleObjectClick from _call_handleObjectClick_4
+    call handleObjectClick
 
     e "Oh, wow! Must have been a false wall!"
     e "Those panels just flew right off!"
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_4
+    call handleObjectClickWrapUp
 
     jump MyRoom
 
 label Scroll:
-    call handleObjectClick from _call_handleObjectClick_5
+    call handleObjectClick
 
     e "Pasted inside the panel you broken open..."
     e "Is a... scroll with writing on it?"
@@ -262,31 +262,10 @@ label ReadScroll:
     jump OpenDoor
 
 label OpenDoor:
-    call handleObjectClick from _call_handleObjectClick_6
+    call handleObjectClick
 
     e "Wow! The Rock Door slides open!"
     e "You escape the room!"
-
-    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_5
-
-    return
-
-label DontOpenDoor:
-    call handleObjectClick
-
-    e "Okay, you decide not to read it."
-    e "..."
-    e "Is that the sort of game you want to play?"
-    e "One where you DON'T read things?"
-    e "Is it too risky for you to read something on the wall?"
-    e "..."
-    e "No, I understand. Of course, there's so much danger and potential peril from READING."
-    e "My GRANDFATHER died from reading."
-    e "He tried to read a word with a silent 'gh'."
-    e "The silent-est killer of all."
-    e "..."
-    e "No, go ahead, I'm sure there's some way out of this room that doesn't involve the incredibly risky activity..."
-    e "Of reading."
 
     call handleObjectClickWrapUp
 
@@ -303,7 +282,7 @@ label HangMirror:
     return
 
 label HangingMirror:
-    call handleObjectClick from _call_handleObjectClick_7
+    call handleObjectClick
 
     if active_action == 'take' or active_action == '':
         $ inventory.append('mirror')
@@ -318,22 +297,22 @@ label HangingMirror:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_6
+    call handleObjectClickWrapUp
 
     jump MyRoom
 
 label SecretSpot:
-    call handleObjectClick from _call_handleObjectClick_8
+    call handleObjectClick
 
     if selected_item == 'hammer':
-        call HitSpot from _call_HitSpot
+        call HitSpot
     elif active_action == 'look':
         if not mirror_placed:
             e "Your eye catches a spot in the wall. You're not sure why..."
         else:
             e "This is about where the mirror's X marks the spot."
     elif active_action == 'take' or active_action == '':
-        call ScratchSpot from _call_ScratchSpot
+        call ScratchSpot
     elif active_action == 'talk':
         e "'Howdy!' you say to a specific spot on the wall!"
         e "..."
@@ -341,7 +320,7 @@ label SecretSpot:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_7
+    call handleObjectClickWrapUp
 
     jump MyRoom
 

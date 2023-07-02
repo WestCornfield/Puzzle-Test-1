@@ -1,52 +1,26 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-After initialization, but before game start.
-  File "game/rooms.rpy", line 312, in prepare_screen
-    screen PuzzleRoomScreen():
-  File "game/rooms.rpy", line 312, in prepare
-    screen PuzzleRoomScreen():
-  File "game/rooms.rpy", line 319, in prepare
-    if open_menu and not open_inventory:
-  File "game/rooms.rpy", line 319, in prepare
-    if open_menu and not open_inventory:
-  File "game/rooms.rpy", line 339, in prepare
-    imagebutton:
-  File "game/rooms.rpy", line 339, in prepare
-    imagebutton:
-SyntaxError: invalid syntax (rooms.rpy, line 342)
+While running game code:
+  File "game/script.rpy", line 37, in script call
+    call MyRoom from _call_MyRoom
+  File "game/script.rpy", line 252, in script
+    jump DontReadScroll
+ScriptError: could not find label 'DontReadScroll'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "/Applications/renpy-7.4.11-sdk/renpy/bootstrap.py", line 331, in bootstrap
-    renpy.main.main()
-  File "/Applications/renpy-7.4.11-sdk/renpy/main.py", line 662, in main
-    run(restart)
-  File "/Applications/renpy-7.4.11-sdk/renpy/main.py", line 97, in run
-    renpy.display.screen.prepare_screens()
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 955, in prepare_screens
-    s.ast.prepare_screen()
-  File "game/rooms.rpy", line 312, in prepare_screen
-    screen PuzzleRoomScreen():
-  File "game/rooms.rpy", line 312, in prepare
-    screen PuzzleRoomScreen():
-  File "game/rooms.rpy", line 319, in prepare
-    if open_menu and not open_inventory:
-  File "game/rooms.rpy", line 319, in prepare
-    if open_menu and not open_inventory:
-  File "game/rooms.rpy", line 339, in prepare
-    imagebutton:
-  File "game/rooms.rpy", line 339, in prepare
-    imagebutton:
-  File "/Applications/renpy-7.4.11-sdk/renpy/pyanalysis.py", line 714, in ast_eval
-    return self.ast_eval_literal(expr)[0]
-  File "/Applications/renpy-7.4.11-sdk/renpy/pyanalysis.py", line 696, in ast_eval_literal
-    expr = py_compile(expr, 'eval', ast_node=True)
-  File "/Applications/renpy-7.4.11-sdk/renpy/python.py", line 835, in py_compile
-    raise e
-SyntaxError: invalid syntax (rooms.rpy, line 342)
+  File "game/script.rpy", line 37, in script call
+    call MyRoom from _call_MyRoom
+  File "game/script.rpy", line 252, in script
+    jump DontReadScroll
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 1757, in execute
+    rv = renpy.game.script.lookup(target)
+  File "/Applications/renpy-7.4.11-sdk/renpy/script.py", line 918, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'DontReadScroll'.
 
 Darwin-21.6.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 Puzzle Test 1 1.0
-Sun Jul  2 00:10:15 2023
+Sun Jul  2 14:30:24 2023
