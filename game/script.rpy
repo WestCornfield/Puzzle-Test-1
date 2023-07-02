@@ -133,7 +133,7 @@ label Door:
         e "Hmm, There's no handle or clear way to open the rock."
 
     elif active_action == 'talk':
-        e "'Hello!' you say, putting your friendlist foot forward!"
+        e "'Hello!' you say, putting your friendliest foot forward!"
         e "..."
         e "Rudely, the stone ignores you."
 
