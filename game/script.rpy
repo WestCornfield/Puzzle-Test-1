@@ -257,6 +257,8 @@ label ReadScroll:
 
     $ scroll_read = True
 
+    play sound stone_slide
+
     jump OpenDoor
 
 label OpenDoor:
