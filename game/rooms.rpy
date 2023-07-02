@@ -98,6 +98,10 @@ transform inventory_spot(spot_number):
     ypos 140
     xpos (150 + (spot_number * 100))
 
+transform option_text_location:
+    xalign 0.5
+    yalign 0.95
+
 #user interface mouse cursor assets
 image take_mouse_cursor = "user_interface/mouse/take/take.png"
 image look_mouse_cursor = "user_interface/mouse/look/look.png"
@@ -327,19 +331,19 @@ screen PuzzleRoomScreen():
         imagebutton:
             auto "look_button_%s"
             at open_look_button_location
-            action [SensitiveIf(not inside_option), SetVariable("active_action", 'look')]
+            action [SensitiveIf(not inside_option), SetVariable("active_action", "look"), SetVariable("selected_item", ''), SetVariable("option_text", "Look at what?")]
         imagebutton:
             auto "talk_button_%s"
             at open_talk_button_location
-            action [SensitiveIf(not inside_option), SetVariable("active_action", 'talk')]
+            action [SensitiveIf(not inside_option), SetVariable("active_action", "talk"), SetVariable("selected_item", ''), SetVariable("option_text", "Talk to what?")]
         imagebutton:
             auto "take_button_%s"
             at open_take_button_location
-            action [SensitiveIf(not inside_option), SetVariable("active_action", 'take')]
+            action [SensitiveIf(not inside_option), SetVariable("active_action", "take"), SetVariable("selected_item", ''), SetVariable("option_text", "Take what?")]
         imagebutton:
             auto "inventory_button_%s"
             at open_inventory_button_location
-            action [SensitiveIf(not inside_option), SetVariable("open_menu", False), SetVariable("open_inventory", True)]
+            action [SensitiveIf(not inside_option), SetVariable("open_menu", False), SetVariable("open_inventory", True), SetVariable('active_action', ''), SetVariable('selected_item', ''), SetVariable('option_text', '')]
     if wall_smashed:
         imagebutton:
             idle "busted_wall_idle"
@@ -408,4 +412,7 @@ screen PuzzleRoomScreen():
             imagebutton:
                 idle "{}_inventory_icon".format(item)
                 at inventory_spot(inventory.index(item))
-                action [SensitiveIf(in_room and not inside_option), SetVariable("selected_item", item)]
+                action [SensitiveIf(in_room and not inside_option), SetVariable("active_action", ""), SetVariable("selected_item", item), SetVariable("option_text", "Use {} with what?".format(item.capitalize()))]
+    if option_text != '':
+        text "{}".format(option_text):
+            at option_text_location

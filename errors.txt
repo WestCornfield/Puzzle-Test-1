@@ -2,17 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 123: expected ':' not found.
-    else active_action == 'look':
-         ^
-
-File "game/script.rpy", line 127: expected statement.
-    else active_action == 'talk':
-                       ^
-
-File "game/script.rpy", line 163: reached end of line when expecting ':'.
-    elif selected_item == 'mirror'
+File "game/rooms.rpy", line 101: expected ':' not found.
+    transform option_text_location
                                   ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat Jul  1 19:37:12 2023
+Sun Jul  2 00:18:19 2023

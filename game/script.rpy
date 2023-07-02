@@ -25,6 +25,7 @@ define open_menu = False
 define open_inventory = False
 define active_action = ''
 define selected_item = ''
+define option_text = ''
 
 # The game starts here.
 
@@ -65,6 +66,54 @@ label handleObjectClick:
     $ inside_option = True
     return
 
+label handleObjectClickWrapUp:
+    $ active_action = ''
+    $ selected_item = ''
+    $ option_text = ''
+    return
+
+label handleTalkClick:
+    $ renpy.show_screen(current_room + "Screen")
+    $ active_action = 'talk'
+    $ selected_item = ''
+    $ option_text = 'Talk to what?'
+    jump MyRoom
+
+label handleTakeClick:
+    $ renpy.show_screen(current_room + "Screen")
+    $ active_action = 'take'
+    $ selected_item = ''
+    $ option_text = 'Take what?'
+    jump MyRoom
+
+label handleLookClick:
+    $ renpy.show_screen(current_room + "Screen")
+    $ active_action = 'look'
+    $ selected_item = ''
+    $ option_text = 'Look at what?'
+    jump MyRoom
+
+label handleMirrorClick:
+    $ renpy.show_screen(current_room + "Screen")
+    $ active_action = ''
+    $ selected_item = 'mirror'
+    $ option_text = 'Use Mirror with what?'
+    jump MyRoom
+
+label handleHammerClick:
+    $ renpy.show_screen(current_room + "Screen")
+    $ active_action = ''
+    $ selected_item = 'hammer'
+    $ option_text = 'Use Hammer with what?'
+    jump MyRoom
+
+label handleInventoryObjectClick(object=''):
+    $ renpy.show_screen(current_room + "Screen")
+    $ active_action = ''
+    $ selected_item = object
+    $ option_text = 'Use {} on what?'.format(object)
+    jump MyRoom
+
 label Door:
     call handleObjectClick
 
@@ -89,6 +138,9 @@ label Door:
         e "Rudely, the stone ignores you."
 
     $ inside_option = False
+
+    call handleObjectClickWrapUp
+
     jump MyRoom
 
 label NoDoorKnob:
@@ -130,6 +182,9 @@ label Hammer:
         e "Rudely, the hammer refuses to shake your hand."
 
     $ inside_option = False
+
+    call handleObjectClickWrapUp
+
     jump MyRoom
 
 label Mirror:
@@ -147,6 +202,9 @@ label Mirror:
         e "Finally, something in this room has manners!"
 
     $ inside_option = False
+
+    call handleObjectClickWrapUp
+
     jump MyRoom
 
 label Nail:
@@ -164,6 +222,9 @@ label Nail:
         e "The nail says nothing, looking down on you from its perch on the wall."
 
     $ inside_option = False
+
+    call handleObjectClickWrapUp
+
     jump MyRoom
 
 label BustedWall:
@@ -173,6 +234,8 @@ label BustedWall:
     e "Those panels just flew right off!"
 
     $ inside_option = False
+
+    call handleObjectClickWrapUp
 
     jump MyRoom
 
@@ -202,6 +265,8 @@ label OpenDoor:
     e "Wow! The Rock Door slides open!"
     e "You escape the room!"
 
+    call handleObjectClickWrapUp
+
     return
 
 label HangMirror:
@@ -229,6 +294,9 @@ label HangingMirror:
         e "Your reflection waves back!"
 
     $ inside_option = False
+
+    call handleObjectClickWrapUp
+
     jump MyRoom
 
 label SecretSpot:
@@ -249,6 +317,9 @@ label SecretSpot:
         e "The wall remains silent."
 
     $ inside_option = False
+
+    call handleObjectClickWrapUp
+
     jump MyRoom
 
 label CantTakeNail:

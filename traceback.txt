@@ -9,11 +9,11 @@ After initialization, but before game start.
     if open_menu and not open_inventory:
   File "game/rooms.rpy", line 319, in prepare
     if open_menu and not open_inventory:
-  File "game/rooms.rpy", line 327, in prepare
+  File "game/rooms.rpy", line 339, in prepare
     imagebutton:
-  File "game/rooms.rpy", line 327, in prepare
+  File "game/rooms.rpy", line 339, in prepare
     imagebutton:
-SyntaxError: invalid syntax (rooms.rpy, line 330)
+SyntaxError: invalid syntax (rooms.rpy, line 342)
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -34,9 +34,9 @@ Full traceback:
     if open_menu and not open_inventory:
   File "game/rooms.rpy", line 319, in prepare
     if open_menu and not open_inventory:
-  File "game/rooms.rpy", line 327, in prepare
+  File "game/rooms.rpy", line 339, in prepare
     imagebutton:
-  File "game/rooms.rpy", line 327, in prepare
+  File "game/rooms.rpy", line 339, in prepare
     imagebutton:
   File "/Applications/renpy-7.4.11-sdk/renpy/pyanalysis.py", line 714, in ast_eval
     return self.ast_eval_literal(expr)[0]
@@ -44,9 +44,9 @@ Full traceback:
     expr = py_compile(expr, 'eval', ast_node=True)
   File "/Applications/renpy-7.4.11-sdk/renpy/python.py", line 835, in py_compile
     raise e
-SyntaxError: invalid syntax (rooms.rpy, line 330)
+SyntaxError: invalid syntax (rooms.rpy, line 342)
 
 Darwin-21.6.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 Puzzle Test 1 1.0
-Sat Jul  1 20:10:18 2023
+Sun Jul  2 00:10:15 2023
