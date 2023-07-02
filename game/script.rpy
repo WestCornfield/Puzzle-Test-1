@@ -68,106 +68,108 @@ label handleObjectClick:
 label Door:
     call handleObjectClick
 
-    e "You move to leave the room, but there's a large stone in the way."
+    if active_action == 'take' or active_action == '':
+        e "You move to leave the room, but there's a large stone in the way."
 
-    menu:
-        "Turn the doorknob":
-            jump NoDoorKnob
-        "Politely knock":
-            jump KnockOnStone
-        "Wink at the rock":
-            jump WinkAtRock
+        menu:
+            "Turn the doorknob":
+                call NoDoorKnob
+            "Politely knock":
+                call KnockOnStone
+            "Wink at the rock":
+                call WinkAtRock
+
+    elif active_action == 'look':
+        e "On the other side of the room, is a large stone slab where a door usually would go."
+        e "Hmm, There's no handle or clear way to open the rock."
+
+    elif active_action == 'talk':
+        e "'Hello!' you say, putting your friendlist foot forward!"
+        e "..."
+        e "Rudely, the stone ignores you."
+
+    $ inside_option = False
+    jump MyRoom
 
 label NoDoorKnob:
     e "...Uh."
-
     e "Nope. No doorknob here."
-
     e "Just a big rock."
 
-    $ inside_option = False
-
-    jump MyRoom
+    return
 
 label KnockOnStone:
     e "You politely knock twice."
-
     e "..."
-
     e "No answer."
-
     e "Probably because it's not a door. It's a rock."
 
-    $ inside_option = False
-
-    jump MyRoom
+    return
 
 label WinkAtRock:
     e "You wink at the rock."
-
     e "..."
-
     e "Nothing happens."
+    e "Perhaps the rock is shy and you were too forward?"
 
-    e "Which... what did you think would happen?"
-
-    $ inside_option = False
-
-    jump MyRoom
+    return
 
 label Hammer:
     call handleObjectClick
 
-    e "On the table in the puzzle room, there's a hammer."
+    if active_action == 'take' or active_action == '':
+        call TakeHammer
 
-    e "It's shimmering. Even the wooden handle, which is odd."
+    elif active_action == 'look':
+        e "On the table in the puzzle room, there's a hammer."
+        e "It's shimmering. Even the wooden handle, which is odd."
 
-    e "Pick it up?"
+    elif active_action == 'talk':
+        e "'Salutations!' you say, extending your hand!"
+        e "..."
+        e "Rudely, the hammer refuses to shake your hand."
 
-    menu:
-        "Pick up the hammer":
-            jump TakeHammer
-        "Leave the hammer where it is":
-            jump LeaveHammer
+    $ inside_option = False
+    jump MyRoom
 
 label Mirror:
     call handleObjectClick
 
-    e "Against the wall of the puzzle room, there's a mirror."
+    if active_action == 'take' or active_action == '':
+        call TakeMirror
+    elif active_action == 'look':
+        e "Against the wall of the puzzle room, there's a mirror."
+        e "It looks like it has a black X on its center... What could that mean?"
+    elif active_action == 'talk':
+        e "'Greetings!' you say, waving politely!"
+        e "...Hey!"
+        e "The mirror is waving back!"
+        e "Finally, something in this room has manners!"
 
-    e "Interestingly, you don't see your reflection in it... Maybe you're a vampire!"
-
-    e "Pick it up?"
-
-    menu:
-        "Pick up the mirror":
-            jump TakeMirror
-        "Leave the mirror where it is":
-            jump LeaveMirror
+    $ inside_option = False
     jump MyRoom
 
 label Nail:
     call handleObjectClick
 
-    e "You see a nail sticking out of the wall."
-
-    menu:
-        "Hang the mirror on the wall" if 'mirror' in inventory:
-            jump HangMirror
-        "Take the nail from the wall":
-            jump CantTakeNail
-        "Leave the nail where it is":
-            jump LeaveNail
+    if selected_item == 'mirror':
+        call HangMirror
+    elif active_action == 'take' or active_action == '':
+        call CantTakeNail
+    elif active_action == 'look':
+        e "You see a nail sticking out of the wall."
+    elif active_action == 'talk':
+        e "'Hiya!' you say, smiling politely."
+        e "..."
+        e "The nail says nothing, looking down on you from its perch on the wall."
 
     $ inside_option = False
-
     jump MyRoom
 
 label BustedWall:
     call handleObjectClick
 
     e "Oh, wow! Must have been a false wall!"
-
     e "Those panels just flew right off!"
 
     $ inside_option = False
@@ -178,7 +180,6 @@ label Scroll:
     call handleObjectClick
 
     e "Pasted inside the panel you broken open..."
-
     e "Is a... scroll with writing on it?"
 
     menu:
@@ -189,7 +190,6 @@ label Scroll:
 
 label ReadScroll:
     e "You lean up close to the wall to read it..."
-
     e "{i}Rood nepo{i}..."
 
     $ scroll_read = True
@@ -200,7 +200,6 @@ label OpenDoor:
     call handleObjectClick
 
     e "Wow! The Rock Door slides open!"
-
     e "You escape the room!"
 
     return
@@ -211,37 +210,46 @@ label HangMirror:
     $ inventory.remove('mirror')
 
     e "Hey, not bad! The mirror really opens up the room!"
-
     e "Oh, also, it looks like that X in the center of the mirror is pointing to the opposite wall."
 
-    $ inside_option = False
-
-    jump MyRoom
+    return
 
 label HangingMirror:
     call handleObjectClick
 
-    e "Hey! It looks like that X in the center of the mirror is pointing to the opposite wall."
+    if active_action == 'take' or active_action == '':
+        $ inventory.append('mirror')
+        $ mirror_placed = False
+        e "You take the mirror off the wall."
+        e "You room feels smaller, but that's just feng shui. It's still the same size, actually."
+    elif active_action == 'look':
+        e "Hey! It looks like that X in the center of the mirror is pointing to the opposite wall."
+    elif active_action == 'talk':
+        e "'Hi!' You wave at the mirror you've hung on the wall!"
+        e "Your reflection waves back!"
 
     $ inside_option = False
-
     jump MyRoom
 
 label SecretSpot:
     call handleObjectClick
 
-    if not mirror_placed:
-        e "Your eye catches a spot in the wall. You're not sure why..."
-    else:
-        e "This is about where the mirror's X marks the spot."
+    if selected_item == 'hammer':
+        call HitSpot
+    elif active_action == 'look':
+        if not mirror_placed:
+            e "Your eye catches a spot in the wall. You're not sure why..."
+        else:
+            e "This is about where the mirror's X marks the spot."
+    elif active_action == 'take' or active_action == '':
+        call ScratchSpot
+    elif active_action == 'talk':
+        e "'Howdy!' you say to a specific spot on the wall!"
+        e "..."
+        e "The wall remains silent."
 
-    menu:
-        "Hit the spot with the Hammer" if 'hammer' in inventory:
-                jump HitSpot
-        "Scratch at the spot":
-                jump ScratchSpot
-        "Leave the spot alone":
-                jump LeaveSpot
+    $ inside_option = False
+    jump MyRoom
 
 label CantTakeNail:
     e "You pry and pry with all your might..."
@@ -250,9 +258,7 @@ label CantTakeNail:
 
     e "Nope, that nail is really stuck in that wall."
 
-    $ inside_option = False
-
-    jump MyRoom
+    return
 
 label HitSpot:
     e "You reel back your mighty hammer..."
@@ -264,74 +270,31 @@ label HitSpot:
 
     e "Wham! The wall caves in! And a secret panel opens!"
 
-    $ inside_option = False
-
-    jump MyRoom
+    return
 
 label ScratchSpot:
     e "You scratch at the spot."
-
     e "..."
-
     e "Nothing happens."
 
-    $ inside_option = False
-
-    jump MyRoom
-
-label LeaveSpot:
-    e "You leave the spot alone."
-
-    $ inside_option = False
-
-    jump MyRoom
-
-label LeaveNail:
-    e "You leave the nail where it is."
-
-    $ inside_option = False
-
-    jump MyRoom
+    return
 
 label TakeMirror:
     $ inventory.append('mirror')
-
     e "The mirror is now in your inventory!"
 
-    $ inside_option = False
-
-    jump MyRoom
-
-label LeaveMirror:
-    e "You leave the mirror where it is."
-
-    $ inside_option = False
-
-    jump MyRoom
+    return
 
 label TakeHammer:
     $ inventory.append('hammer')
-
     e "The hammer is now in your inventory!"
 
-    $ inside_option = False
-
-    jump MyRoom
-
-label LeaveHammer:
-    e "You leave the hammer where it is."
-
-    $ inside_option = False
-
-    jump MyRoom
+    return
 
 label EnterPuzzleRoom:
     e "You wake up in a mysterious room."
-
     e "You don't remember how you arrived here. But..."
-
-    e "Or, perhaps, for that reason."
-
+    e "Or, perhaps, *because* you can't remember..."
     e "You decide you'd like to leave."
 
     return

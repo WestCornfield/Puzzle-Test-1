@@ -98,6 +98,14 @@ transform inventory_spot(spot_number):
     ypos 140
     xpos (150 + (spot_number * 100))
 
+#user interface mouse cursor assets
+image take_mouse_cursor = "user_interface/mouse/take/take.png"
+image look_mouse_cursor = "user_interface/mouse/look/look.png"
+image talk_mouse_cursor = "user_interface/mouse/talk/talk.png"
+
+image mirror_mouse_cursor = "user_interface/mouse/objects/mirror/mirror.png"
+image hammer_mouse_cursor = "user_interface/mouse/objects/hammer/hammer.png"
+
 #user interface idle assets
 image dropdown_button_idle = "user_interface/dropdown/button/idle/Dropdown_Button.png"
 image dropdown_button_inversed_idle = "user_interface/dropdown/button/idle/Dropdown_Button_inversed_resized.png"
