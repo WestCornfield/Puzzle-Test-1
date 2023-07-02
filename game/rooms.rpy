@@ -102,6 +102,10 @@ transform option_text_location:
     xalign 0.5
     yalign 0.95
 
+transform table_location:
+    ypos 392
+    xpos 733
+
 #user interface mouse cursor assets
 image take_mouse_cursor = "user_interface/mouse/take/take.png"
 image look_mouse_cursor = "user_interface/mouse/look/look.png"
@@ -199,11 +203,13 @@ image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
 image mirror_idle = "objects/mirror/idle/Mirror.png"
 image hammer_idle = "objects/hammer/idle/Hammer.png"
 image nail_idle = "objects/nail/idle/Nail.png"
+image table_idle = "objects/table/table.png"
 image busted_wall_idle = "objects/busted_wall/idle_with_scroll.png"
 image scroll_idle = "objects/scroll/idle/scroll.png"
 image secret_spot_idle = "objects/secret_spot/idle/Spot.png"
 image rock_door_closed_idle = "objects/doors/rock_door/idle/closed/rock_door.png"
 image rock_door_open_idle = "objects/doors/rock_door/idle/open/rock_door.png"
+
 
 image rock_door_opening:
     "objects/doors/rock_door/animation/opening_animation/frame_01.png"
@@ -368,6 +374,9 @@ screen PuzzleRoomScreen():
             auto "mirror_%s"
             at resting_on_wall
             action [SensitiveIf(in_room and not inside_option), Jump("Mirror")]
+    imagebutton:
+        idle "table_idle"
+        at table_location
     if not 'hammer' in inventory:
         imagebutton:
             auto "hammer_%s"
