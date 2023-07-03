@@ -246,6 +246,7 @@ label NailHole:
         e "Probably."
     elif selected_item == 'nail':
         $ nail_removed = False
+        $ inventory.remove('nail')
         e "The nail slips back into the hole securely."
     elif active_action == 'take' or active_action == '':
         e "You want to take a hole?"
