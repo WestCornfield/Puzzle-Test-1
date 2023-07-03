@@ -19,6 +19,7 @@ define inventory = []
 define inside_option = False
 define mirror_placed = False
 define wall_smashed = False
+define nail_removed = False
 define scroll_read = False
 
 define open_menu = False
@@ -214,6 +215,8 @@ label Nail:
 
     if selected_item == 'mirror':
         call HangMirror from _call_HangMirror
+    elif selected_item == 'hammer':
+        call TakeNail
     elif active_action == 'take' or active_action == '':
         call CantTakeNail from _call_CantTakeNail
     elif active_action == 'look':
@@ -226,6 +229,38 @@ label Nail:
     $ inside_option = False
 
     call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_3
+
+    jump MyRoom
+
+label NailHole:
+    call handleObjectClick
+
+    if selected_item == 'mirror':
+        e "Hmm... You try to put the mirror on the wall."
+        e "Unfortunately, there's nothing for it to rest on..."
+        e "Didn't something used to be at this spot?"
+    elif selected_item == 'hammer':
+        e "You already pulled the nail out."
+        e "And there's probably a way out of the room without taking out a potentially load-bearing wall."
+        e "..."
+        e "Probably."
+    elif selected_item == 'nail':
+        $ nail_removed = False
+        e "The nail slips back into the hole securely."
+    elif active_action == 'take' or active_action == '':
+        e "You want to take a hole?"
+        e "A hole is the absence of space!"
+        e "You can't take what ISN'T!"
+    elif active_action == 'look':
+        e "The hole in the wall where the nail used to be."
+    elif active_action == 'talk':
+        e "'Hiya!' you say, smiling politely."
+        e "..."
+        e "The hole says nothing, snootily."
+
+    $ inside_option = False
+
+    call handleObjectClickWrapUp
 
     jump MyRoom
 
@@ -337,6 +372,39 @@ label SecretSpot:
     call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_7
 
     jump MyRoom
+
+label TakeNail:
+    e "You turn the hammer around, set the back of its head against the nail and..."
+
+    $ nail_removed = True
+
+    $ inventory.append('nail')
+
+    e "Pop! The nail comes out! There, now, there's not a nail sticking out of the wall."
+
+    e "The nail is now in your inventory!"
+
+    e "...Still."
+
+    e "That leaves an unsightly hole in the wall."
+
+    e "Maybe, you can find a bit of caulk somewhere, you can plug up the hole."
+
+    e "Then, you just need some tasteful art, maybe found at a local market, so the wall looks less empty."
+
+    e "Ooh, or maybe a fake bowl of fruit for color?"
+
+    e "..."
+
+    e "...Wait."
+
+    e "What are you trying to do again?"
+
+    e "..."
+
+    e "Oh! That's right! Escape!"
+
+    return
 
 label CantTakeNail:
     e "You pry and pry with all your might..."

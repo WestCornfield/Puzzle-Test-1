@@ -106,14 +106,6 @@ transform table_location:
     ypos 392
     xpos 733
 
-#user interface mouse cursor assets
-image take_mouse_cursor = "user_interface/mouse/take/take.png"
-image look_mouse_cursor = "user_interface/mouse/look/look.png"
-image talk_mouse_cursor = "user_interface/mouse/talk/talk.png"
-
-image mirror_mouse_cursor = "user_interface/mouse/objects/mirror/mirror.png"
-image hammer_mouse_cursor = "user_interface/mouse/objects/hammer/hammer.png"
-
 #user interface idle assets
 image dropdown_button_idle = "user_interface/dropdown/button/idle/Dropdown_Button.png"
 image dropdown_button_inversed_idle = "user_interface/dropdown/button/idle/Dropdown_Button_inversed_resized.png"
@@ -134,6 +126,7 @@ image close_inventory_idle = "user_interface/inventory/background/icons/close/id
 
 image hammer_inventory_icon = "user_interface/inventory/icons/hammer/idle/hammer.png"
 image mirror_inventory_icon = "user_interface/inventory/icons/mirror/idle/mirror.png"
+image nail_inventory_icon = "user_interface/inventory/icons/nail/idle/nail.png"
 
 #user interface hover assets
 image look_button_hover:
@@ -202,6 +195,7 @@ image inventory_button_hover:
 image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
 image mirror_idle = "objects/mirror/idle/Mirror.png"
 image hammer_idle = "objects/hammer/idle/Hammer.png"
+image nail_hole_idle = "objects/nail_hole/idle/Nail_Hole.png"
 image nail_idle = "objects/nail/idle/Nail.png"
 image table_idle = "objects/table/table.png"
 image busted_wall_idle = "objects/busted_wall/idle_with_scroll.png"
@@ -209,7 +203,6 @@ image scroll_idle = "objects/scroll/idle/scroll.png"
 image secret_spot_idle = "objects/secret_spot/idle/Spot.png"
 image rock_door_closed_idle = "objects/doors/rock_door/idle/closed/rock_door.png"
 image rock_door_open_idle = "objects/doors/rock_door/idle/open/rock_door.png"
-
 
 image rock_door_opening:
     "objects/doors/rock_door/animation/opening_animation/frame_01.png"
@@ -306,6 +299,17 @@ image mirror_hover:
     pause 0.1
     repeat
 
+image nail_hole_hover:
+    "objects/nail_hole/hover/frame_00.png"
+    pause 2.0
+    "objects/nail_hole/hover/frame_01.png"
+    pause 0.1
+    "objects/nail_hole/hover/frame_02.png"
+    pause 0.1
+    "objects/nail_hole/hover/frame_03.png"
+    pause 0.1
+    repeat
+
 image nail_hover:
     "objects/nail/hover/frame_00.png"
     pause 2.0
@@ -382,11 +386,16 @@ screen PuzzleRoomScreen():
             auto "hammer_%s"
             at resting_on_table
             action [SensitiveIf(in_room and not inside_option), Jump("Hammer")]
-    if not mirror_placed:
+    if not mirror_placed and not nail_removed:
         imagebutton:
             auto "nail_%s"
             at nail_in_wall
             action [SensitiveIf(in_room and not inside_option), Jump("Nail")]
+    if nail_removed:
+        imagebutton:
+            auto "nail_hole_%s"
+            at nail_in_wall
+            action [SensitiveIf(in_room and not inside_option), Jump("NailHole")]
     if mirror_placed:
         imagebutton:
             auto "hanging_mirror_%s"
