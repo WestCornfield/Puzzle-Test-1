@@ -9,11 +9,11 @@ Implemented first puzzle solution
 Add certain animation and sound effects
 Adding inventory overlay
 Enhancing UI per player test (closing inventory screen on inventory button click)
-
-NEXT STEPS:
 Adding additional actions based on player test notes
 - Making the nail removable (and re-placable)
 - Making the mirror breakable (and unbreakable)
+
+NEXT STEPS:
 Make Bad Ending Screen Work
 - Add image
 - Write text mocking player for not reading scroll multiple times.
