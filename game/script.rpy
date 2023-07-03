@@ -27,6 +27,8 @@ define active_action = ''
 define selected_item = ''
 define option_text = ''
 
+define timesScrollUnread = 0
+
 # The game starts here.
 
 label start:
@@ -261,6 +263,18 @@ label ReadScroll:
 
     jump OpenDoor
 
+label DontReadScroll:
+    e "You decide not to read the scroll."
+    e "..."
+    e "Which is fair."
+    e "I mean, there's so much more to do in this room, right?"
+
+    $ inside_option = False
+
+    call handleObjectClickWrapUp
+
+    jump MyRoom
+
 label OpenDoor:
     call handleObjectClick from _call_handleObjectClick_6
 
@@ -268,27 +282,6 @@ label OpenDoor:
     e "You escape the room!"
 
     call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_5
-
-    return
-
-label DontOpenDoor:
-    call handleObjectClick
-
-    e "Okay, you decide not to read it."
-    e "..."
-    e "Is that the sort of game you want to play?"
-    e "One where you DON'T read things?"
-    e "Is it too risky for you to read something on the wall?"
-    e "..."
-    e "No, I understand. Of course, there's so much danger and potential peril from READING."
-    e "My GRANDFATHER died from reading."
-    e "He tried to read a word with a silent 'gh'."
-    e "The silent-est killer of all."
-    e "..."
-    e "No, go ahead, I'm sure there's some way out of this room that doesn't involve the incredibly risky activity..."
-    e "Of reading."
-
-    call handleObjectClickWrapUp
 
     return
 

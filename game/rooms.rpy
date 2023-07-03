@@ -421,7 +421,7 @@ screen PuzzleRoomScreen():
             imagebutton:
                 idle "{}_inventory_icon".format(item)
                 at inventory_spot(inventory.index(item))
-                action [SensitiveIf(in_room and not inside_option), SetVariable("active_action", ""), SetVariable("selected_item", item), SetVariable("option_text", "Use {} with what?".format(item.capitalize()))]
+                action [SensitiveIf(in_room and not inside_option), SetVariable("active_action", ""), SetVariable("open_inventory", False), SetVariable("selected_item", item), SetVariable("option_text", "Use {} with what?".format(item.capitalize()))]
     if option_text != '':
         text "{}".format(option_text):
             at option_text_location

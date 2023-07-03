@@ -23,4 +23,4 @@ ScriptError: could not find label 'DontReadScroll'.
 Darwin-21.6.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 Puzzle Test 1 1.0
-Sun Jul  2 14:30:24 2023
+Mon Jul  3 10:19:51 2023
