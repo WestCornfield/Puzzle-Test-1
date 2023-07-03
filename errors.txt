@@ -2,8 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/rooms.rpy", line 448: is not terminated with a newline. (Check strings and parenthesis.)
-                    action [SensitiveIf(in_room and not inside_option), SetVariable("active_action", ""), SetVariable("open_inventory", False), SetVariable("selected_item", item), SetVariable("option_text", "Use {} with what?".format(item.capitalize().replace('_', ' '))]
+File "game/script.rpy", line 47: Line is indented, but the preceding say statement statement does not expect a block. Please check this line's indentation.
+    return
+    ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon Jul  3 13:12:45 2023
+Mon Jul  3 14:23:27 2023

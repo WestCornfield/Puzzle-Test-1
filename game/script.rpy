@@ -28,8 +28,11 @@ define open_inventory = False
 define active_action = ''
 define selected_item = ''
 define option_text = ''
+define player_statement = ''
 
 define timesScrollUnread = 0
+
+define gameOver = False
 
 # The game starts here.
 
@@ -45,6 +48,9 @@ label start:
     return
 
 label MyRoom:
+    if gameOver == True:
+        return
+
     #Update values behind the scenes
     $ update_gamestate()
 
@@ -62,6 +68,10 @@ label MyRoom:
     $ _window_hide()
     $ renpy.call_screen(current_room + "Screen")
 
+    return
+
+label goodEnding:
+    $ gameOver = True
     return
 
 label handleObjectClick:
@@ -131,21 +141,59 @@ label Door:
                 call KnockOnStone from _call_KnockOnStone
             "Wink at the rock":
                 call WinkAtRock from _call_WinkAtRock
+            "Speak to the door":
+                call SpeakToDoor
 
     elif active_action == 'look':
         e "On the other side of the room, is a large stone slab where a door usually would go."
         e "Hmm, There's no handle or clear way to open the rock."
 
     elif active_action == 'talk':
-        e "'Hello!' you say, putting your friendliest foot forward!"
-        e "..."
-        e "Rudely, the stone ignores you."
+        call SpeakToDoor
 
     $ inside_option = False
 
     call handleObjectClickWrapUp from _call_handleObjectClickWrapUp
 
     jump MyRoom
+
+label SpeakToDoor:
+    e "You clear your throat."
+    $ player_statement = renpy.input("What do you say to the door?", length=32).lower()
+
+    if not player_statement:
+        e "You suddenly become shy and your tongue sticks in your throat!"
+        e "Don't be nervous! I'm sure you and this giant rock have many common interests!"
+    elif player_statement == 'hello':
+        e "'Hello!' you say, putting your friendliest foot forward!"
+        e "..."
+        e "Rudely, the stone ignores you."
+    elif player_statement == 'open':
+        e "'Open!' you say commandingly, authoritatively! Like it would be in the rock's best interest to do as you say!"
+        e "..."
+        e "Defiantly, the rock remains in place."
+    elif player_statement == 'open please' or player_statement == 'please open':
+        e "'Open please!' you say politely, but firmly!"
+        e "..."
+        e "What?!? The rock remains in place?!?"
+        e "...But. You said please!"
+    elif player_statement == 'open sesame':
+        e "'Open sesame!' you call out!"
+        e "..."
+        e "The rock doesn't move!"
+        e "Oh, come ON! That always works!"
+    elif player_statement == 'rood nepo':
+        e "'Rood nepo!' you call out!"
+        jump OpenDoor
+    else:
+        e "You speak passionately and from the heart!"
+        e "'[player_statement]!'"
+        e "..."
+        e "The rock is unmoved."
+        e "Literally."
+        e "Womp womp."
+
+    return
 
 label NoDoorKnob:
     e "...Uh."
@@ -347,10 +395,6 @@ label ReadScroll:
     e "You lean up close to the wall to read it..."
     e "{i}Rood nepo{i}..."
 
-    $ scroll_read = True
-
-    play sound stone_slide
-
     jump OpenDoor
 
 label DontReadScroll:
@@ -368,12 +412,16 @@ label DontReadScroll:
 label OpenDoor:
     call handleObjectClick from _call_handleObjectClick_6
 
+    $ scroll_read = True
+
+    play sound stone_slide
+
     e "Wow! The Rock Door slides open!"
     e "You escape the room!"
 
     call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_5
 
-    return
+    jump goodEnding
 
 label HangMirror:
     $ mirror_placed = True
