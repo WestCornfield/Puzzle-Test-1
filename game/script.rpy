@@ -46,6 +46,9 @@ label start:
 
     e "You finished the game!"
 
+    $ inventory.clear()
+    $ timesScrollUnread = 0
+
     return
 
 label MyRoom:
