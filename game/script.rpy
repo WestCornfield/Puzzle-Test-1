@@ -37,6 +37,8 @@ define gameOver = False
 # The game starts here.
 
 label start:
+    $ inventory = []
+
     e "Here is the start of your game."
 
     #Call the first scene
