@@ -2,11 +2,8 @@
 errors listed below, and try again.
 
 
-The label DontReadScroll is defined twice, at File "game/script.rpy", line 266:
-label DontReadScroll:
-and File "game/script.rpy", line 288:
-label DontReadScroll:
-
+File "game/rooms.rpy", line 448: is not terminated with a newline. (Check strings and parenthesis.)
+                    action [SensitiveIf(in_room and not inside_option), SetVariable("active_action", ""), SetVariable("open_inventory", False), SetVariable("selected_item", item), SetVariable("option_text", "Use {} with what?".format(item.capitalize().replace('_', ' '))]
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon Jul  3 10:21:16 2023
+Mon Jul  3 13:12:45 2023

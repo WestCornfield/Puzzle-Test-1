@@ -21,6 +21,7 @@ define mirror_placed = False
 define wall_smashed = False
 define nail_removed = False
 define scroll_read = False
+define broke_mirror = False
 
 define open_menu = False
 define open_inventory = False
@@ -193,7 +194,22 @@ label Hammer:
 label Mirror:
     call handleObjectClick from _call_handleObjectClick_2
 
-    if active_action == 'take' or active_action == '':
+    if selected_item == 'hammer':
+        e "...Okay. Just checking."
+        e "I understand the potential confusion."
+        e "There's an X drawn on it."
+        e "Maybe, you're thinking like... The X means strike here!"
+        e "And I will tell you, the game is still winnable without the mirror."
+        e "The solution is just... MUCH LESS obvious."
+        e "So. Are you *sure* you want to smash the mirror?"
+        menu:
+            "Yes":
+                jump SmashMirror
+            "No":
+                e "Phew, okay."
+                e "I mean, I don't want to limit your freedom of choice."
+                e "But, I think that's a good move."
+    elif active_action == 'take' or active_action == '':
         call TakeMirror from _call_TakeMirror
     elif active_action == 'look':
         e "Against the wall of the puzzle room, there's a mirror."
@@ -210,10 +226,48 @@ label Mirror:
 
     jump MyRoom
 
+label BrokenMirror:
+    call handleObjectClick
+
+    if selected_item == 'hammer':
+        e "...The mirror is already very smashed."
+        e "And you make a mental note that some emotional counseling might help with your desire to randomly desire property."
+    elif active_action == 'take' or active_action == '':
+        call TakeMirror
+    elif active_action == 'look':
+        e "Against the wall of the puzzle room, there's a mirror."
+        e "Y'know. The one you smashed with a hammer."
+        e "That's seven years of bad luck!"
+    elif active_action == 'talk':
+        e "'Greetings!' you say, waving politely!"
+        e "..."
+        e "You can't make out your reflection any more."
+
+    $ inside_option = False
+
+    call handleObjectClickWrapUp
+
+    jump MyRoom
+
+label SmashMirror:
+    $ broke_mirror = True
+
+    e "KERASH!"
+    e "The mirror shatters!"
+    e "..."
+    e "Okay, I'm respecting your choice."
+    e "Good luck from here."
+
+    $ inside_option = False
+
+    call handleObjectClickWrapUp
+
+    jump MyRoom
+
 label Nail:
     call handleObjectClick from _call_handleObjectClick_3
 
-    if selected_item == 'mirror':
+    if selected_item == 'mirror' or selected_item == 'broken_mirror':
         call HangMirror from _call_HangMirror
     elif selected_item == 'hammer':
         call TakeNail
@@ -324,26 +378,47 @@ label OpenDoor:
 label HangMirror:
     $ mirror_placed = True
 
-    $ inventory.remove('mirror')
+    if not broke_mirror:
+        $ inventory.remove('mirror')
 
-    e "Hey, not bad! The mirror really opens up the room!"
-    e "Oh, also, it looks like that X in the center of the mirror is pointing to the opposite wall."
+        e "Hey, not bad! The mirror really opens up the room!"
+        e "Oh, also, it looks like that X in the center of the mirror is pointing to the opposite wall."
+    else:
+        $ inventory.remove('broken_mirror')
+        e "I mean, that's an interior design choice."
+        e "What is a mirror but a reflection? A projection? A distortion!"
+        e "And a broken mirror is a demand to deny yourself these distortions!"
+        e "To face reality!"
+        e "What a statement! Brava! Bold! Daring!"
 
     return
 
 label HangingMirror:
     call handleObjectClick from _call_handleObjectClick_7
 
-    if active_action == 'take' or active_action == '':
-        $ inventory.append('mirror')
-        $ mirror_placed = False
-        e "You take the mirror off the wall."
-        e "You room feels smaller, but that's just feng shui. It's still the same size, actually."
-    elif active_action == 'look':
-        e "Hey! It looks like that X in the center of the mirror is pointing to the opposite wall."
-    elif active_action == 'talk':
-        e "'Hi!' You wave at the mirror you've hung on the wall!"
-        e "Your reflection waves back!"
+    if not broke_mirror:
+        if active_action == 'take' or active_action == '':
+            $ inventory.append('mirror')
+            $ mirror_placed = False
+            e "You take the mirror off the wall."
+            e "You room feels smaller, but that's just feng shui. It's still the same size, actually."
+        elif active_action == 'look':
+            e "Hey! It looks like that X in the center of the mirror is pointing to the opposite wall."
+        elif active_action == 'talk':
+            e "'Hi!' You wave at the mirror you've hung on the wall!"
+            e "Your reflection waves back!"
+    else:
+        if active_action == 'take' or active_action == '':
+            $ inventory.append('broken_mirror')
+            $ mirror_placed = False
+            e "You take the broken mirror off the wall, careful not to cut yourself on the shards of glass."
+        elif active_action == 'look':
+            e "Hmm, it's hard to make out what the mirror might have indicated..."
+            e "Although you do remember an X in its center."
+        elif active_action == 'talk':
+            e "'Hi!' You wave at the broken mirror you've hung on the wall!"
+            e "..."
+            e "Nothing happens, though."
 
     $ inside_option = False
 
@@ -436,8 +511,12 @@ label ScratchSpot:
     return
 
 label TakeMirror:
-    $ inventory.append('mirror')
-    e "The mirror is now in your inventory!"
+    if not broke_mirror:
+        $ inventory.append('mirror')
+        e "The mirror is now in your inventory!"
+    else:
+        $ inventory.append('broken_mirror')
+        e "The broken mirror is now in your inventory!"
 
     return
 

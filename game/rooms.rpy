@@ -126,6 +126,7 @@ image close_inventory_idle = "user_interface/inventory/background/icons/close/id
 
 image hammer_inventory_icon = "user_interface/inventory/icons/hammer/idle/hammer.png"
 image mirror_inventory_icon = "user_interface/inventory/icons/mirror/idle/mirror.png"
+image broken_mirror_inventory_icon = "user_interface/inventory/icons/broken_mirror/idle/broken_mirror.png"
 image nail_inventory_icon = "user_interface/inventory/icons/nail/idle/nail.png"
 
 #user interface hover assets
@@ -193,7 +194,9 @@ image inventory_button_hover:
 
 #in-game idle assets
 image hanging_mirror_idle = "objects/mirror/hanged/idle/Hanged_Mirror.png"
+image hanging_broken_mirror_idle = "objects/broken_mirror/hanged/idle/Hanged_Broken_Mirror.png"
 image mirror_idle = "objects/mirror/idle/Mirror.png"
+image broken_mirror_idle = "objects/broken_mirror/idle/Broken_Mirror.png"
 image hammer_idle = "objects/hammer/idle/Hammer.png"
 image nail_hole_idle = "objects/nail_hole/idle/Nail_Hole.png"
 image nail_idle = "objects/nail/idle/Nail.png"
@@ -373,11 +376,17 @@ screen PuzzleRoomScreen():
         imagebutton:
             idle "rock_door_opening"
             at door_location
-    if not mirror_placed and not 'mirror' in inventory:
-        imagebutton:
-            auto "mirror_%s"
-            at resting_on_wall
-            action [SensitiveIf(in_room and not inside_option), Jump("Mirror")]
+    if not mirror_placed and not 'mirror' in inventory and not 'broken_mirror' in inventory:
+        if not broke_mirror:
+            imagebutton:
+                auto "mirror_%s"
+                at resting_on_wall
+                action [SensitiveIf(in_room and not inside_option), Jump("Mirror")]
+        else:
+            imagebutton:
+                idle "broken_mirror_idle"
+                at resting_on_wall
+                action [SensitiveIf(in_room and not inside_option), Jump("BrokenMirror")]
     imagebutton:
         idle "table_idle"
         at table_location
@@ -397,10 +406,16 @@ screen PuzzleRoomScreen():
             at nail_in_wall
             action [SensitiveIf(in_room and not inside_option), Jump("NailHole")]
     if mirror_placed:
-        imagebutton:
-            auto "hanging_mirror_%s"
-            at mirror_on_wall
-            action [SensitiveIf(in_room and not inside_option), Jump("HangingMirror")]
+        if not broke_mirror:
+            imagebutton:
+                auto "hanging_mirror_%s"
+                at mirror_on_wall
+                action [SensitiveIf(in_room and not inside_option), Jump("HangingMirror")]
+        else:
+            imagebutton:
+                idle "hanging_broken_mirror_idle"
+                at mirror_on_wall
+                action [SensitiveIf(in_room and not inside_option), Jump("HangingMirror")]
     if not wall_smashed:
         imagebutton:
             idle "secret_spot_idle"
@@ -430,7 +445,7 @@ screen PuzzleRoomScreen():
             imagebutton:
                 idle "{}_inventory_icon".format(item)
                 at inventory_spot(inventory.index(item))
-                action [SensitiveIf(in_room and not inside_option), SetVariable("active_action", ""), SetVariable("open_inventory", False), SetVariable("selected_item", item), SetVariable("option_text", "Use {} with what?".format(item.capitalize()))]
+                action [SensitiveIf(in_room and not inside_option), SetVariable("active_action", ""), SetVariable("open_inventory", False), SetVariable("selected_item", item), SetVariable("option_text", "Use {} with what?".format(item.capitalize().replace('_', ' ')))]
     if option_text != '':
         text "{}".format(option_text):
             at option_text_location
