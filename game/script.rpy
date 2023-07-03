@@ -393,9 +393,14 @@ label Scroll:
 
 label ReadScroll:
     e "You lean up close to the wall to read it..."
-    e "{i}Rood nepo{i}..."
+    e "{i}Rood nepo{i}...?"
+    e "...What does that mean?"
 
-    jump OpenDoor
+    $ inside_option = False
+
+    call handleObjectClickWrapUp
+
+    jump MyRoom
 
 label DontReadScroll:
     e "You decide not to read the scroll."
