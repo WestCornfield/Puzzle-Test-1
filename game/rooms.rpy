@@ -326,6 +326,9 @@ image nail_hover:
     pause 0.1
     repeat
 
+screen BadEndingRoomScreen():
+    add "rooms/BadEndingRoom/Bad_Ending_Room.png"
+
 screen PuzzleRoomScreen():
     add "rooms/PuzzleRoom/Puzzle_Room_Basic.png"
     if not open_menu and not open_inventory:

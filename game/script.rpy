@@ -14,6 +14,7 @@ default previous_room = ""
 
 define audio.rock_smash = "audio/sounds/rock_smash.mp3"
 define audio.stone_slide = "audio/sounds/stone_slide.mp3"
+define audio.glass_break = "audio/sounds/glass_break.mp3"
 
 define inventory = []
 define inside_option = False
@@ -62,6 +63,9 @@ label MyRoom:
     if current_room != previous_room:
         $ check_intro_reactions(current_room)
     $ previous_room = current_room
+
+    if gameOver == True:
+        return
 
     #Enable scene interactivity
     $ in_room = True
@@ -245,9 +249,9 @@ label Mirror:
     if selected_item == 'hammer':
         e "...Okay. Just checking."
         e "I understand the potential confusion."
-        e "There's an X drawn on it."
+        e "There's an X drawn on the mirror."
         e "Maybe, you're thinking like... The X means strike here!"
-        e "And I will tell you, the game is still winnable without the mirror."
+        e "And I will tell you, the game is still winnable without an unbroken mirror."
         e "The solution is just... MUCH LESS obvious."
         e "So. Are you *sure* you want to smash the mirror?"
         menu:
@@ -299,6 +303,7 @@ label BrokenMirror:
 
 label SmashMirror:
     $ broke_mirror = True
+    play sound glass_break
 
     e "KERASH!"
     e "The mirror shatters!"
@@ -403,10 +408,46 @@ label ReadScroll:
     jump MyRoom
 
 label DontReadScroll:
-    e "You decide not to read the scroll."
-    e "..."
-    e "Which is fair."
-    e "I mean, there's so much more to do in this room, right?"
+    if timesScrollUnread == 0:
+        e "You decide not to read the scroll."
+        e "..."
+        e "Which is fair."
+        e "I mean, there's so much more to do in this room, right?"
+    if timesScrollUnread == 1:
+        e "You again, decide not to read the scroll."
+        e "..."
+        e "Are you worried that... like, this is a trap?"
+        e "I would get it if I were asking you, 'do you want to tear the page off the wall?'"
+        e "Because, sure, that could activate some motion activated trap."
+        e "But, I'm just asking if you want to read something... that you're already looking at."
+        e "Like... It's reading. Right up there with eating tapioca and holding a railing when you're on stairs..."
+        e "As the safest activities imaginable."
+    if timesScrollUnread == 2:
+        e "For the third time, you... play it safe... and don't read the scroll."
+        e "..."
+        e "No, no."
+        e "I get it."
+        e "We have to be very thoughtful about this!"
+        e "You DAREDEVIL! Taking on the incredible risk OF READING."
+        e "DO BE CAREFUL. My third-grade teacher once DIED reading Curious George to us."
+        e "She got to a silent 'n' in 'solemn'... She never saw it coming."
+        e "That 'n' truly was a silent killer."
+        e "..."
+        e "No, it's okay. I guess we'll just stay in this room."
+        e "Forever."
+    if timesScrollUnread == 3:
+        jump DontReadScrollAFourthTime
+
+    $ timesScrollUnread += 1
+
+    $ inside_option = False
+
+    call handleObjectClickWrapUp
+
+    jump MyRoom
+
+label DontReadScrollAFourthTime:
+    $ current_room = "BadEndingRoom"
 
     $ inside_option = False
 
@@ -584,5 +625,47 @@ label EnterPuzzleRoom:
     e "You don't remember how you arrived here. But..."
     e "Or, perhaps, *because* you can't remember..."
     e "You decide you'd like to leave."
+
+    return
+
+label EnterBadEndingRoom:
+    e "..."
+    e "Are you proud of yourself?"
+    e "Yeah, you broke the game."
+    e "You went outside of what I planned!"
+    e "We SAILED off the edge of the map."
+    e "I didn't think this would happen!!!"
+    e "HOW COULD I HAVE PLANNED FOR THIS?!?"
+    e "The player doesn't read the scroll once? Sure."
+    e "Maybe you think you're about to beat the game and you wanna try everything before it ends."
+    e "Smash the mirror with the hammer."
+    e "Pull the nail out of the wall."
+    e "Say 'open sesame' to the door."
+    e "I get it. Gotta try everything."
+    e "Second time? Sure."
+    e "The first reaction was a little sarcastic."
+    e "You tried it again and I got even more upset! HAHAHAHAHA!"
+    e "Hilarious!"
+    e "Third time? Absolutely."
+    e "Comedy has a rule of three's. If you do it twice? You HAVE to do it a third time."
+    e "I can't fault you for that."
+    e "..."
+    e "Four times?"
+    e "FOUR TIMES?!?"
+    e "WHAT KIND OF MADMAN (or madwoman (or madperson)) ARE YOU?"
+    e "Why would you REFUSE TO READ A SCROLL ON THE WALL?!?"
+    e "FOUR TIMES?!?!?!??!?!"
+    e "..."
+    e "You know what?"
+    e "We're done."
+    e "I have other things I could do with my day than watch you..."
+    e "Stand in this room."
+    e "Refusing to read."
+    e "Bad Ending."
+    e "Bad You."
+
+    $ gameOver = True
+
+    jump MyRoom
 
     return
