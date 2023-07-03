@@ -146,14 +146,14 @@ label Door:
             "Wink at the rock":
                 call WinkAtRock from _call_WinkAtRock
             "Speak to the door":
-                call SpeakToDoor
+                call SpeakToDoor from _call_SpeakToDoor
 
     elif active_action == 'look':
         e "On the other side of the room, is a large stone slab where a door usually would go."
         e "Hmm, There's no handle or clear way to open the rock."
 
     elif active_action == 'talk':
-        call SpeakToDoor
+        call SpeakToDoor from _call_SpeakToDoor_1
 
     $ inside_option = False
 
@@ -279,13 +279,13 @@ label Mirror:
     jump MyRoom
 
 label BrokenMirror:
-    call handleObjectClick
+    call handleObjectClick from _call_handleObjectClick_9
 
     if selected_item == 'hammer':
         e "...The mirror is already very smashed."
         e "And you make a mental note that some emotional counseling might help with your desire to randomly desire property."
     elif active_action == 'take' or active_action == '':
-        call TakeMirror
+        call TakeMirror from _call_TakeMirror_1
     elif active_action == 'look':
         e "Against the wall of the puzzle room, there's a mirror."
         e "Y'know. The one you smashed with a hammer."
@@ -297,7 +297,7 @@ label BrokenMirror:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp
+    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_8
 
     jump MyRoom
 
@@ -313,7 +313,7 @@ label SmashMirror:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp
+    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_9
 
     jump MyRoom
 
@@ -323,7 +323,7 @@ label Nail:
     if selected_item == 'mirror' or selected_item == 'broken_mirror':
         call HangMirror from _call_HangMirror
     elif selected_item == 'hammer':
-        call TakeNail
+        call TakeNail from _call_TakeNail
     elif active_action == 'take' or active_action == '':
         call CantTakeNail from _call_CantTakeNail
     elif active_action == 'look':
@@ -340,7 +340,7 @@ label Nail:
     jump MyRoom
 
 label NailHole:
-    call handleObjectClick
+    call handleObjectClick from _call_handleObjectClick_10
 
     if selected_item == 'mirror':
         e "Hmm... You try to put the mirror on the wall."
@@ -368,7 +368,7 @@ label NailHole:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp
+    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_10
 
     jump MyRoom
 
@@ -403,7 +403,7 @@ label ReadScroll:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp
+    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_11
 
     jump MyRoom
 
@@ -442,7 +442,7 @@ label DontReadScroll:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp
+    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_12
 
     jump MyRoom
 
@@ -451,7 +451,7 @@ label DontReadScrollAFourthTime:
 
     $ inside_option = False
 
-    call handleObjectClickWrapUp
+    call handleObjectClickWrapUp from _call_handleObjectClickWrapUp_13
 
     jump MyRoom
 
